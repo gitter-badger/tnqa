@@ -30,6 +30,19 @@ gem 'jbuilder', '~> 1.2'
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', require: false
+gem 'devise'
+gem 'simple_enum'
+gem 'kaminari'
+gem 'bootstrap-kaminari-views'
+gem 'bootstrap-sass', '~> 3.1.1'
+end
+
+group :development, :test do
+  gem 'rspec-rails', '~> 3.0.0.beta'
+  gem 'shoulda-matchers'
+  gem 'faker'
+  gem 'database_cleaner'
+  gem "factory_girl_rails", "~> 4.0"
 end
 
 # Use ActiveModel has_secure_password
