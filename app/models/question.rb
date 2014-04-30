@@ -1,5 +1,9 @@
 class Question < ActiveRecord::Base
 
-belongs_to :user
+	validates :title, length: {minimum: 5}
+  validates :title, presence: true
+  validates :content, presence: true
+
+  belongs_to :user
 
 end

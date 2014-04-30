@@ -32,6 +32,7 @@ gem 'simple_enum'
 gem 'kaminari'
 gem 'bootstrap-kaminari-views'
 gem 'bootstrap-sass', '~> 3.1.1'
+gem "slim-rails"
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
