@@ -1,7 +1,7 @@
 require 'spec_helper'
 
-feature 'create question', 'to qet answer being auth. I want to ask' do 
-	scenario 'auth user create q' do
+feature 'create question', 'to qet answer being auth. I want to ask' do
+	scenario 'auth user create q', js: true do
 		User.create!(email: 'user@mail.com', password: 'qwertyui', name: 'name')
 
 		visit new_user_session_path
