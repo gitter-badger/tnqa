@@ -2,8 +2,8 @@
 
 FactoryGirl.define do
   factory :question do
-    title "MyString"
-    content "MyText"
-    user_id ""
+    title { Faker::Lorem.sentence(3, true, 4) }
+    content { Faker::Lorem.paragraph(rand(2..6)) }
+    user
   end
 end
