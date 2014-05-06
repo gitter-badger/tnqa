@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 	
-  validates :name, presence: true, length: {in: 3..20}
+  validates :name, presence: true, length: {in: 3..200}
   
   has_many :questions
 

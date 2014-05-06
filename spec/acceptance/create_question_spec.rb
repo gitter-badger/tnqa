@@ -1,13 +1,14 @@
 require 'spec_helper'
 
+
 feature 'create question', 'to qet answer being auth. I want to ask' do
+  
   scenario 'auth user create q' do
-    let(:user) { create(:user) }
+    User.create!(email: 'user1@mail.com', password: 'qwertyui', name: 'name')
     
     visit new_user_session_path
-    sign_in user
-    # fill_in 'Email', with: 'user@mail.com'
-    # fill_in 'Password', with: 'qwertyui'
+    fill_in 'Email', with: 'user1@mail.com'
+    fill_in 'Password', with: 'qwertyui'
     click_on 'Sign in'
 
     visit '/questions'
