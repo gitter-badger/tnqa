@@ -1,6 +1,8 @@
 require 'spec_helper'
 
 describe QuestionsController do
+  let(:question) { create(:question) }
+  let(:user) { create(:user) }
 
   describe 'GET #index' do
     let(:questions) {create_list(:question, 2)}
@@ -17,8 +19,6 @@ describe QuestionsController do
   end
 
   describe 'GET #show' do
-    let(:question) { create(:question) }
-
     before { get :show, id: question }
 
     it 'assigns the requested question to @question' do
@@ -32,7 +32,8 @@ describe QuestionsController do
 
   describe 'GET #new' do
 
-    before { sign_in User.create!(email: 'user@mail.com', password: 'qwertyui', name: 'name'); get :new }
+    before { sign_in user; get :new }
+      #User.create!(email: 'user@mail.com', password: 'qwertyui', name: 'name'); get :new }
 
     it 'assigns a new question to @question' do
       expect(assigns(:question)).to be_a_new(Question)
@@ -44,7 +45,6 @@ describe QuestionsController do
   end
 
   describe 'GET #edit' do
-    let(:question) { create(:question) }
     before { get :edit, id: question }
 
     it "assigns the requested question to @question" do

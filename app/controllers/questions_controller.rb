@@ -1,5 +1,5 @@
 class QuestionsController < ApplicationController
-
+  before_action :load_question, only: [:show, :edit]
   before_action :authenticate_user!, only: [:create, :new]
 
   def index
@@ -7,7 +7,6 @@ class QuestionsController < ApplicationController
   end
 
   def show
-    @question = Question.find(params[:id])
   end
 
   def new
@@ -24,10 +23,13 @@ class QuestionsController < ApplicationController
   end
 
 def edit
-	@question = Question.find(params[:id])
 end
 
   private
+
+  def load_question
+  	@question = Question.find(params[:id])
+  end
 
   def question_params
     params.require(:question).permit(:content, :title)
