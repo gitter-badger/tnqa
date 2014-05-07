@@ -35,7 +35,6 @@ describe QuestionsController do
   describe 'GET #new' do
 
     before { sign_in user; get :new }
-    #User.create!(email: 'user@mail.com', password: 'qwertyui', name: 'name'); get :new }
 
     it 'assigns a new question to @question' do
       expect(assigns(:question)).to be_a_new(Question)

@@ -11,7 +11,8 @@ feature 'update question', 'to correct info I want to update question' do
     fill_in 'Password', with: 'qwertyui'
     click_on 'Sign in'
 
-    visit edit_question_path(question)
+    visit "/questions/#{question[:id]}"
+    click_button 'Update'
     fill_in("Title", with: "My Title")
     fill_in("Content", with: 'My Body')
     click_button 'Update'
@@ -21,15 +22,25 @@ feature 'update question', 'to correct info I want to update question' do
   end
 
   scenario 'auth user update question' do
-    User.create!(email: 'user1@mail.com', password: 'qwertyui', name: 'name')
+    User.create!(email: 'user1@mail.com', password: 'qwertyui', name: 'name', id: 6780000)
+    User.create!(email: 'user2@mail.com', password: 'qwertyui2', name: 'name2', id: 6780002)
 
+    question = Question.create!(title: 'notblanc', content: 'notblanc', user_id: 6780002)
+
+    visit new_user_session_path
+    fill_in 'Email', with: 'user1@mail.com'
+    fill_in 'Password', with: 'qwertyui'
+    click_on 'Sign in'
+
+    visit "/questions/#{question[:id]}"
+    expect(page).to_not have_content("Update")
   end
 
   scenario 'non-auth user update question' do
-    # visit '/question'
-    # click_on 'Update question'
+    User.create!(email: 'user2@mail.com', password: 'qwertyui2', name: 'name2', id: 6780002)
+    question = Question.create!(title: 'notblanc', content: 'notblanc', user_id: 6780002)
 
-    # expect(page).to have_content "You need to sign in or sign up before continuing."
-
+    visit "/questions/#{question[:id]}"
+    expect(page).to_not have_content("Update")
   end
 end
