@@ -59,6 +59,9 @@ describe QuestionsController do
   end
 
   describe 'POST #create' do
+
+    before { sign_in user }
+
     context 'valid attributes' do
       it 'saves the new question to db' do
         expect { post :create, question: attributes_for(:question) }.to change(Question, :count).by(1)
@@ -83,6 +86,9 @@ describe QuestionsController do
     end
 
   describe 'PATCH #update' do
+
+   before { sign_in user }
+
     context 'valid attributes' do
     it "assigns the requested question to @question" do
       patch :update, id: question, question: attributes_for(:question)
@@ -93,7 +99,7 @@ describe QuestionsController do
       patch :update, id: question, question: { title: 'new title', content: 'new content'}
       question.reload
       expect(question.title).to eq 'new title'
-      expect(question.content).to eq 'new content'
+      expect(question.title).to eq('new title')
     end
 
     it 'redirects to the updated question' do
@@ -107,8 +113,8 @@ describe QuestionsController do
 
      it 'does not change q attributes' do
       question.reload
-      expect(question.title).to eq attributes_for(question[:title])
-      expect(question.content).to eq attributes_for(question[:content])
+      expect(question.title).to_not eq('new title')
+      expect(question.title).to_not eq nil
     end
 
      it "re-renders edit view" do
@@ -118,7 +124,7 @@ end
 end
 
 describe 'DELETE #destroy' do
-    before { question }
+    before { sign_in user; question }
 
     it 'deletes question' do
       expect { delete :destroy, id: question }.to change(Question, :count).by(-1)
