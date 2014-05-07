@@ -1,5 +1,5 @@
 class QuestionsController < ApplicationController
-  
+
   before_action :authenticate_user!, only: [:create, :new, :update, :destroy]
 
   def index
@@ -23,28 +23,28 @@ class QuestionsController < ApplicationController
     end
   end
 
-def edit
-  question
-end
+  def edit
+    question
+  end
 
-def update
-	if question.update(question_params)
-		redirect_to @question, notice: "Your question has been updated"
-	else
-		render :edit
-end
-end
+  def update
+    if question.update(question_params)
+      redirect_to @question, notice: "Your question has been updated"
+    else
+      render :edit
+    end
+  end
 
-def destroy
-  question.destroy
-  redirect_to questions_path
-end
+  def destroy
+    question.destroy
+    redirect_to questions_path
+  end
 
 
   private
 
   def question
-  	@question ||= Question.find(params[:id])
+    @question ||= Question.find(params[:id])
   end
 
   def question_params

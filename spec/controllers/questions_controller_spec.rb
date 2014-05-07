@@ -35,7 +35,7 @@ describe QuestionsController do
   describe 'GET #new' do
 
     before { sign_in user; get :new }
-      #User.create!(email: 'user@mail.com', password: 'qwertyui', name: 'name'); get :new }
+    #User.create!(email: 'user@mail.com', password: 'qwertyui', name: 'name'); get :new }
 
     it 'assigns a new question to @question' do
       expect(assigns(:question)).to be_a_new(Question)
@@ -82,48 +82,48 @@ describe QuestionsController do
         post :create, question: attributes_for(:invalid_question)
         expect(response).to render_template :new
       end
-     end
     end
+  end
 
   describe 'PATCH #update' do
 
-   before { sign_in user }
+    before { sign_in user }
 
     context 'valid attributes' do
-    it "assigns the requested question to @question" do
-      patch :update, id: question, question: attributes_for(:question)
-      expect(assigns(:question)).to eq question
-    end
-    
-    it 'changes question attributes' do
-      patch :update, id: question, question: { title: 'new title', content: 'new content'}
-      question.reload
-      expect(question.title).to eq 'new title'
-      expect(question.title).to eq('new title')
-    end
+      it "assigns the requested question to @question" do
+        patch :update, id: question, question: attributes_for(:question)
+        expect(assigns(:question)).to eq question
+      end
 
-    it 'redirects to the updated question' do
-      patch :update, id: question, question: attributes_for(:question)
-      expect(response).to redirect_to question
+      it 'changes question attributes' do
+        patch :update, id: question, question: { title: 'new title', content: 'new content'}
+        question.reload
+        expect(question.title).to eq 'new title'
+        expect(question.title).to eq('new title')
+      end
+
+      it 'redirects to the updated question' do
+        patch :update, id: question, question: attributes_for(:question)
+        expect(response).to redirect_to question
+      end
     end
-  end
 
     context 'invalid attributes' do
       before {patch :update, id: question, question: { title: 'new title', content: nil} }
 
-     it 'does not change q attributes' do
-      question.reload
-      expect(question.title).to_not eq('new title')
-      expect(question.title).to_not eq nil
+      it 'does not change q attributes' do
+        question.reload
+        expect(question.title).to_not eq('new title')
+        expect(question.title).to_not eq nil
+      end
+
+      it "re-renders edit view" do
+        expect(response).to render_template :edit
+      end
     end
-
-     it "re-renders edit view" do
-      expect(response).to render_template :edit
   end
-end
-end
 
-describe 'DELETE #destroy' do
+  describe 'DELETE #destroy' do
     before { sign_in user; question }
 
     it 'deletes question' do
@@ -136,6 +136,3 @@ describe 'DELETE #destroy' do
     end
   end
 end
-
-
-

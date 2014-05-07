@@ -1,9 +1,9 @@
 require 'spec_helper'
 
 feature 'update question', 'to correct info I want to update question' do
-      
-   scenario 'owner update question' do
-     User.create!(email: 'user1@mail.com', password: 'qwertyui', name: 'name', id: 6780000)
+
+  scenario 'owner update question' do
+    User.create!(email: 'user1@mail.com', password: 'qwertyui', name: 'name', id: 6780000)
     question = Question.create!(title: 'notblanc', content: 'notblanc', user_id: 6780000)
 
     visit new_user_session_path
@@ -11,19 +11,19 @@ feature 'update question', 'to correct info I want to update question' do
     fill_in 'Password', with: 'qwertyui'
     click_on 'Sign in'
 
-      #visit "/questions/#{question[:id]}"
-      visit edit_question_path(question)
-      fill_in("Title", with: "My Title")
-      fill_in("Content", with: 'My Body')
-      click_button 'Update'
-    #expect(assigns(:question)).to have(title: "My Title", content: 'My Body')
+    visit edit_question_path(question)
+    fill_in("Title", with: "My Title")
+    fill_in("Content", with: 'My Body')
+    click_button 'Update'
+    expect(question.reload.title).to eq "My Title"
+    expect(question.reload.content).to eq 'My Body'
     expect(page).to have_content("Your question has been updated")
   end
 
   scenario 'auth user update question' do
     User.create!(email: 'user1@mail.com', password: 'qwertyui', name: 'name')
 
-end
+  end
 
   scenario 'non-auth user update question' do
     # visit '/question'
