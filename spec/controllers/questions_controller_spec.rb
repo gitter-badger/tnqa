@@ -3,6 +3,8 @@ require 'spec_helper'
 describe QuestionsController do
   let(:question) { create(:question) }
   let(:user) { create(:user) }
+  let(:invalid_question) { create(:invalid_question) }
+
 
   describe 'GET #index' do
     let(:questions) {create_list(:question, 2)}
@@ -47,14 +49,87 @@ describe QuestionsController do
   describe 'GET #edit' do
     before { get :edit, id: question }
 
+    it 'assigns an edit question to @question' do
+      expect(assigns(:question)).to eq question
+    end
+
+    it 'renders edit view' do
+      expect(response).to render_template :edit
+    end
+  end
+
+  describe 'POST #create' do
+    context 'valid attributes' do
+      it 'saves the new question to db' do
+        expect { post :create, question: attributes_for(:question) }.to change(Question, :count).by(1)
+      end
+
+      it 'redirects to show view' do
+        post :create, question: attributes_for(:question)
+        expect(response).to redirect_to question_path(assigns(:question))
+      end
+    end
+
+    context 'invalid attributes' do
+      it 'does not save the question' do
+        expect { post :create, question: attributes_for(:invalid_question) }.to_not change(Question, :count)
+      end
+
+      it 're-renders new view' do
+        post :create, question: attributes_for(:invalid_question)
+        expect(response).to render_template :new
+      end
+     end
+    end
+
+  describe 'PATCH #update' do
+    context 'valid attributes' do
     it "assigns the requested question to @question" do
+      patch :update, id: question, question: attributes_for(:question)
       expect(assigns(:question)).to eq question
     end
     
-    it "renders edit view" do
+    it 'changes question attributes' do
+      patch :update, id: question, question: { title: 'new title', content: 'new content'}
+      question.reload
+      expect(question.title).to eq 'new title'
+      expect(question.content).to eq 'new content'
+    end
+
+    it 'redirects to the updated question' do
+      patch :update, id: question, question: attributes_for(:question)
+      expect(response).to redirect_to question
+    end
+  end
+
+    context 'invalid attributes' do
+      before {patch :update, id: question, question: { title: 'new title', content: nil} }
+
+     it 'does not change q attributes' do
+      question.reload
+      expect(question.title).to eq attributes_for(question[:title])
+      expect(question.content).to eq attributes_for(question[:content])
+    end
+
+     it "re-renders edit view" do
       expect(response).to render_template :edit
   end
 end
-
 end
+
+describe 'DELETE #destroy' do
+    before { question }
+
+    it 'deletes question' do
+      expect { delete :destroy, id: question }.to change(Question, :count).by(-1)
+    end
+
+    it 'redirect to index view' do
+      delete :destroy, id: question
+      expect(response).to redirect_to questions_path
+    end
+  end
+end
+
+
 

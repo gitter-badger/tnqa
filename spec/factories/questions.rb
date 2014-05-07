@@ -6,4 +6,9 @@ FactoryGirl.define do
     content { Faker::Lorem.paragraph(rand(2..6)) }
     user
   end
+
+  factory :invalid_question do
+  	title nil
+  	content nil
+  end
 end
