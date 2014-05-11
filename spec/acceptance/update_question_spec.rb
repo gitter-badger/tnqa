@@ -2,13 +2,15 @@ require 'spec_helper'
 
 feature 'update question', 'to correct info I want to update question' do
 
-  scenario 'owner update question' do
-    User.create!(email: 'user1@mail.com', password: 'qwertyui', name: 'name', id: 6780000)
-    question = Question.create!(title: 'notblanc', content: 'notblanc', user_id: 6780000)
+let(:user) {create(:user)}
+let(:user2) {create(:user)}
+let(:question) {create(:question, user: user)}
+let(:question2) {create(:question, user: user2)}
 
+  scenario 'owner update question' do
     visit new_user_session_path
-    fill_in 'Email', with: 'user1@mail.com'
-    fill_in 'Password', with: 'qwertyui'
+    fill_in 'Email', with: user.email
+    fill_in 'Password', with: user.password
     click_on 'Sign in'
 
     visit "/questions/#{question[:id]}"
@@ -22,24 +24,16 @@ feature 'update question', 'to correct info I want to update question' do
   end
 
   scenario 'auth user update question' do
-    User.create!(email: 'user1@mail.com', password: 'qwertyui', name: 'name', id: 6780000)
-    User.create!(email: 'user2@mail.com', password: 'qwertyui2', name: 'name2', id: 6780002)
-
-    question = Question.create!(title: 'notblanc', content: 'notblanc', user_id: 6780002)
-
     visit new_user_session_path
-    fill_in 'Email', with: 'user1@mail.com'
-    fill_in 'Password', with: 'qwertyui'
+    fill_in 'Email', with: user.email
+    fill_in 'Password', with: user.password
     click_on 'Sign in'
 
-    visit "/questions/#{question[:id]}"
+    visit "/questions/#{question2[:id]}"
     expect(page).to_not have_content("Edit")
   end
 
   scenario 'non-auth user update question' do
-    #User.create!(email: 'user2@mail.com', password: 'qwertyui2', name: 'name2', id: 6780002)
-    question = Question.create!(title: 'notblanc', content: 'notblanc', user_id: 6780002)
-
     visit "/questions/#{question[:id]}"
     expect(page).to_not have_content("Edit")
   end

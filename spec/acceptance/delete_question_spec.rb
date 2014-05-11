@@ -3,12 +3,10 @@ require 'spec_helper'
 feature 'delete question', 'I want to delete question' do
 
 let(:user) {create(:user)}
-let(:user2) {create(:user2)}
-#let(:question) {create(:question)}
-let(:question2) {create(:question2)}
+let(:user2) {create(:user)}
+let(:question) {create(:question, user: user)}
+let(:question2) {create(:question, user: user2)}
   scenario 'owner delete question' do
-    question = Question.create!(title: 'notblanc', content: 'notblanc', user_id: user.id)
-
     visit new_user_session_path
     fill_in 'Email', with: user.email
     fill_in 'Password', with: user.password
@@ -31,7 +29,7 @@ let(:question2) {create(:question2)}
   end
 
   scenario 'non-auth user delete question' do
-    visit "/questions/#{question2[:id]}"
+    visit "/questions/#{question[:id]}"
     expect(page).to_not have_content("Edit")
   end
 end
