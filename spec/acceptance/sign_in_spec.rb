@@ -2,19 +2,14 @@ require 'spec_helper'
 
 feature 'Signing in', 'log in to ask' do
 
-  scenario 'Existing user try to log in' do
-    user = create(:user)
+ let(:user) {create(:user)}
 
-    visit new_user_session_path
-    fill_in 'Email', with: user.email
-    fill_in 'Password', with: 'foobarrr'
-    click_on 'Sign in'
+  scenario 'Existing user try to log in' do
+    sign_in(user)
     expect(page).to have_content 'Signed in successfully.'
   end
 
   scenario 'Existing user try to log in with invalid password' do
-    user = create(:user)
-
     visit new_user_session_path
     fill_in 'Email', with: user.email
     fill_in 'Password', with: 'invalidpassword'

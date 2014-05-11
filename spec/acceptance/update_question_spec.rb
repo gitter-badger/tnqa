@@ -8,10 +8,7 @@ let(:question) {create(:question, user: user)}
 let(:question2) {create(:question, user: user2)}
 
   scenario 'owner update question' do
-    visit new_user_session_path
-    fill_in 'Email', with: user.email
-    fill_in 'Password', with: user.password
-    click_on 'Sign in'
+    sign_in(user)
 
     visit "/questions/#{question[:id]}"
     click_on 'Edit'
@@ -24,10 +21,7 @@ let(:question2) {create(:question, user: user2)}
   end
 
   scenario 'auth user update question' do
-    visit new_user_session_path
-    fill_in 'Email', with: user.email
-    fill_in 'Password', with: user.password
-    click_on 'Sign in'
+    sign_in(user)
 
     visit "/questions/#{question2[:id]}"
     expect(page).to_not have_content("Edit")
