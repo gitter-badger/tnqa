@@ -12,6 +12,13 @@ FactoryGirl.define do
     password_confirmation { |u| u.password }
   end
 
+  factory :user2, class: User do
+    name "Name"
+    email
+    password "password"
+    password_confirmation { |u| u.password }
+  end
+
   factory :invalid_user, class: User do
   	name nil
   	password nil

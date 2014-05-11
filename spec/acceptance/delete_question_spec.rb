@@ -2,13 +2,16 @@ require 'spec_helper'
 
 feature 'delete question', 'I want to delete question' do
 
+let(:user) {create(:user)}
+let(:user2) {create(:user2)}
+#let(:question) {create(:question)}
+let(:question2) {create(:question2)}
   scenario 'owner delete question' do
-    User.create!(email: 'user1@mail.com', password: 'qwertyui', name: 'name', id: 6780000)
-    question = Question.create!(title: 'notblanc', content: 'notblanc', user_id: 6780000)
+    question = Question.create!(title: 'notblanc', content: 'notblanc', user_id: user.id)
 
     visit new_user_session_path
-    fill_in 'Email', with: 'user1@mail.com'
-    fill_in 'Password', with: 'qwertyui'
+    fill_in 'Email', with: user.email
+    fill_in 'Password', with: user.password
     click_on 'Sign in'
 
     visit "/questions/#{question[:id]}"
@@ -18,25 +21,17 @@ feature 'delete question', 'I want to delete question' do
   end
 
   scenario 'auth user delete question' do
-    User.create!(email: 'user1@mail.com', password: 'qwertyui', name: 'name', id: 6780000)
-    User.create!(email: 'user2@mail.com', password: 'qwertyui2', name: 'name2', id: 6780002)
-
-    question = Question.create!(title: 'notblanc', content: 'notblanc', user_id: 6780002)
-
     visit new_user_session_path
-    fill_in 'Email', with: 'user1@mail.com'
-    fill_in 'Password', with: 'qwertyui'
+    fill_in 'Email', with: user.email
+    fill_in 'Password', with: user.password
     click_on 'Sign in'
 
-    visit "/questions/#{question[:id]}"
+    visit "/questions/#{question2[:id]}"
     expect(page).to_not have_content("Edit")
   end
 
   scenario 'non-auth user delete question' do
-    User.create!(email: 'user2@mail.com', password: 'qwertyui2', name: 'name2', id: 6780002)
-    question = Question.create!(title: 'notblanc', content: 'notblanc', user_id: 6780002)
-
-    visit "/questions/#{question[:id]}"
+    visit "/questions/#{question2[:id]}"
     expect(page).to_not have_content("Edit")
   end
 end
