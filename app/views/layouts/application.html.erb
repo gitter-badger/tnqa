@@ -7,9 +7,28 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-       <p class="notice"><%= notice %></p>
-       <p class="alert"><%= alert %></p>
-<%= yield %>
+<div class="container">
+      <div class="header">
+        <ul class="nav nav-pills pull-right">
+          <% if user_signed_in? %>
+            <li><%= link_to('Sign Out', destroy_user_session_path, method: :delete) %></li>
+          <% else %>
+            <li><%= link_to('Sign In', new_user_session_path) %></li>
+            <li><%= link_to('Sign Up', new_user_registration_path) %></li>
+          <% end %>
+        </ul>
+        <h3 class="text-muted"> <%= link_to 'Q&A', root_path %></h3>
+      </div>
 
+      <% if notice %><p class="alert alert-success"><%= notice %></p> <% end %>
+      <% if alert %><p class="alert alert-danger"><%= alert %></p><% end %>
+
+
+      <div class="row marketing"><%= yield %></div>
+
+      <div class="footer">
+        <p>&copy; Company 2014</p>
+      </div>
+    </div> <!-- /container -->
 </body>
 </html>
