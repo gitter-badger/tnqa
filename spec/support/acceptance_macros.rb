@@ -9,18 +9,18 @@ module AcceptanceMacros
 
   def sign_up(user)
     fill_in 'Name', with: 'Name'
-    fill_in 'Email', with: 'test.ru'
+    fill_in 'Email', with: 'test@test.ru'
     fill_in 'Password', with: 'password'
     fill_in 'Password confirmation', with: 'password'
     click_button "Sign up"
   end
 
   def not_sign_up(user)
-        fill_in 'Name', with: 'Name'
-        fill_in 'Email', with: 'test.ru'
-        fill_in 'Password', with: 'password'
-        fill_in 'Password confirmation', with: 'password'
-        click_button "Sign up"
+    fill_in 'Name', with: 'Name'
+    fill_in 'Email', with: 'test.ru'
+    fill_in 'Password', with: 'password'
+    fill_in 'Password confirmation', with: 'password'
+    click_button "Sign up"
   end
 
 end
