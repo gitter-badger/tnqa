@@ -23,7 +23,7 @@ feature 'Signing up', 'sign up to ask' do
       scenario 'new user is redirected' do
         visit new_user_registration_path
         sign_up
-        expect(page.current_path).to eq root_path
+        expect(page.current_path).to eq questions_path
       end
 
     end
