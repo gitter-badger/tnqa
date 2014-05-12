@@ -9,21 +9,21 @@ feature 'Signing up', 'sign up to ask' do
     context "valid attributes" do
       scenario "user can sign up through registration page" do
         visit new_user_registration_path
-        sign_up(user)
+        sign_up
         expect(page).to have_content "Welcome! You have signed up successfully"
       end
 
       scenario 'new user is created' do
         expect do
           visit new_user_registration_path
-          sign_up(user)
+          sign_up
         end.to change(User, :count).by(1)
       end
 
       scenario 'new user is redirected' do
         visit new_user_registration_path
-        sign_up(user)
-        expect(current_url).to eq(users_url)
+        sign_up
+        expect(page.current_path).to eq root_path
       end
 
     end
@@ -31,14 +31,14 @@ feature 'Signing up', 'sign up to ask' do
     context "invalid attributes" do
       scenario "user can not sign up with invalid attributes" do
         visit new_user_registration_path
-        not_sign_up(user)
+        not_sign_up
         expect(page).to have_content "Email is invalid"
       end
 
       scenario 'new user is not created' do
         expect do
           visit new_user_registration_path
-          not_sign_up(user)
+          not_sign_up
         end.to_not change(User, :count)
       end
     end

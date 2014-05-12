@@ -7,7 +7,7 @@ module AcceptanceMacros
     click_on 'Sign in'
   end
 
-  def sign_up(user)
+  def sign_up
     fill_in 'Name', with: 'Name'
     fill_in 'Email', with: 'test@test.ru'
     fill_in 'Password', with: 'password'
@@ -15,7 +15,7 @@ module AcceptanceMacros
     click_button "Sign up"
   end
 
-  def not_sign_up(user)
+  def not_sign_up
     fill_in 'Name', with: 'Name'
     fill_in 'Email', with: 'test.ru'
     fill_in 'Password', with: 'password'
