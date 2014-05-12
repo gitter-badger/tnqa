@@ -11,7 +11,6 @@ feature 'Signing up', 'sign up to ask' do
         visit new_user_registration_path
         sign_up(user)
         expect(page).to have_content "Welcome! You have signed up successfully"
-        #expect(response).to redirect_to questions_path
       end
 
       scenario 'new user is created' do
@@ -21,10 +20,10 @@ feature 'Signing up', 'sign up to ask' do
         end.to change(User, :count).by(1)
       end
 
-      scenario 'new user is created' do
-          visit new_user_registration_path
-          sign_up(user)
-          expect(current_url).to eq(users_url)
+      scenario 'new user is redirected' do
+        visit new_user_registration_path
+        sign_up(user)
+        expect(current_url).to eq(users_url)
       end
 
     end
@@ -37,24 +36,24 @@ feature 'Signing up', 'sign up to ask' do
       end
 
       scenario 'new user is not created' do
-      	expect do
-        visit new_user_registration_path
-        not_sign_up(user)
-      end.to_not change(User, :count)
+        expect do
+          visit new_user_registration_path
+          not_sign_up(user)
+        end.to_not change(User, :count)
+      end
     end
+
+    scenario 'existing user try to sign in' do
+
+      visit new_user_registration_path
+      fill_in 'Name', with: user.name
+      fill_in 'Email', with: user.email
+      fill_in 'Password', with: user.password
+      fill_in 'Password confirmation', with: user.password_confirmation
+      click_on 'Sign up'
+
+      expect(page).to have_content "prohibited this user from being saved"
+    end
+
   end
-
-  scenario 'existing user try to sign in' do
-
-    visit new_user_registration_path
-    fill_in 'Name', with: user.name
-    fill_in 'Email', with: user.email
-    fill_in 'Password', with: user.password
-    fill_in 'Password confirmation', with: user.password_confirmation
-    click_on 'Sign up'
-
-    expect(page).to have_content "prohibited this user from being saved"
-  end
-
-end
 end
