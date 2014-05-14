@@ -7,7 +7,7 @@ let(:user) {create(:user)}
   scenario 'auth user create q' do
     sign_in(user)
 
-    visit '/questions'
+    visit root_path
     click_on 'Ask question'
     fill_in 'Title', with: 'my title'
     fill_in 'Content', with: 'my content'

@@ -1,7 +1,0 @@
-<h2>
-  <%= @question.title %>
-  <% if @question.user == current_user %>
-    <small><%= link_to 'Edit', edit_question_path(@question) %></small>
-  <% end %>
-</h2>
-<p><%= @question.content %></p>

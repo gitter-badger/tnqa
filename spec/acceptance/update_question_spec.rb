@@ -10,7 +10,7 @@ let(:question2) {create(:question, user: user2)}
   scenario 'owner update question' do
     sign_in(user)
 
-    visit "/questions/#{question[:id]}"
+    visit question_path(question)
     click_on 'Edit'
     fill_in("Title", with: "My Title")
     fill_in("Content", with: 'My Body')
@@ -23,12 +23,12 @@ let(:question2) {create(:question, user: user2)}
   scenario 'auth user update question' do
     sign_in(user)
 
-    visit "/questions/#{question2[:id]}"
+    visit question_path(question2)
     expect(page).to_not have_content("Edit")
   end
 
   scenario 'non-auth user update question' do
-    visit "/questions/#{question[:id]}"
+    visit question_path(question)
     expect(page).to_not have_content("Edit")
   end
 end

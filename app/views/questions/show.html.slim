@@ -1,0 +1,18 @@
+h2
+  =@question.title
+p
+  =@question.content
+
+- if @question.user == current_user
+    small= link_to 'Edit', edit_question_path(@question)
+
+.answers
+  - @question.answers.each do |answer|
+    p= answer.content
+
+= form_for [@question, @answer] do |f|
+  .form-group
+   = f.label :content, 'Your answer'
+   = f.text_area :content, class: 'form-control'
+  .actions
+   = f.submit 'Create', class: 'btn btn-danger'

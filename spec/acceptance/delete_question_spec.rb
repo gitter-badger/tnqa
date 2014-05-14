@@ -9,7 +9,7 @@ let(:question2) {create(:question, user: user2)}
   scenario 'owner delete question' do
     sign_in(user)
 
-    visit "/questions/#{question[:id]}"
+    visit question_path(question)
     click_on 'Edit'
     click_on 'Delete'
     expect(page).to have_content("Your question has been deleted")
@@ -18,12 +18,12 @@ let(:question2) {create(:question, user: user2)}
   scenario 'auth user delete question' do
     sign_in(user)
 
-    visit "/questions/#{question2[:id]}"
+    visit question_path(question2)
     expect(page).to_not have_content("Edit")
   end
 
   scenario 'non-auth user delete question' do
-    visit "/questions/#{question[:id]}"
+    visit question_path(question)
     expect(page).to_not have_content("Edit")
   end
 end
