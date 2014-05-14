@@ -5,7 +5,7 @@ feature 'User answer', 'to help friends I answer their questions' do
 	let(:user) { create(:user)}
 	let(:question) { create(:question)}
 
-	scenario 'auth user create answer' do
+	scenario 'auth user create answer', js: true do
 	sign_in(user)
 	visit question_path(question)
 
