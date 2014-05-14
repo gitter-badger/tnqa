@@ -1,9 +1,13 @@
 = form_for @question do |f|
- = f.label :title
- = f.text_field :title
- = f.label :content
- = f.text_area :content
- = f.submit 'Update'
+	div class="form-group" 
+	 = f.label :title
+	 = f.text_field :title, class: 'form-control'
+	div class="form-group"
+	 = f.label :content
+	 = f.text_area :content, class: 'form-control'
+	div class="actions"
+	 = f.submit 'Update', class: 'btn btn-primary'
 
 = form_for @question, method: :delete do |f|
- = f.submit 'Delete'
+	div class="actions" 
+	 = f.submit 'Delete', class: 'btn btn-danger'
