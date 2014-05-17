@@ -17,5 +17,14 @@ feature 'User answer', 'to help friends I answer their questions' do
   expect(page).to have_content 'My answer'
 	end
 	end
+
+	scenario 'auth user try to create invalid answer', js: true do
+    sign_in(user)
+    visit question_path(question)
+
+    click_on 'Create'
+
+    expect(page).to have_content "Content can't be blanc"
+	end
 end
 

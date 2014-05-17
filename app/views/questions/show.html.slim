@@ -12,6 +12,7 @@ p
 = form_for [@question, @answer], remote: true do |f|
   .form-group
    = f.label :content, 'Your answer'
+   .answer_errors
    = f.text_area :content, class: 'form-control'
   .actions
    = f.submit 'Create', class: 'btn btn-danger'
