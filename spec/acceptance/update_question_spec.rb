@@ -1,4 +1,4 @@
-require 'spec_helper'
+require_relative 'acceptance_helper'
 
 feature 'update question', 'to correct info I want to update question' do
 

@@ -1,8 +1,8 @@
-require 'spec_helper'
+require_relative 'acceptance_helper'
 
 feature 'create question', 'to qet answer being auth. I want to ask' do
 
-let(:user) {create(:user)}
+let!(:user) {create(:user)}
 
   scenario 'auth user create q' do
     sign_in(user)

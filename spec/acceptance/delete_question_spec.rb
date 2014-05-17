@@ -1,4 +1,4 @@
-require 'spec_helper'
+require_relative 'acceptance_helper'
 
 feature 'delete question', 'I want to delete question' do
 
