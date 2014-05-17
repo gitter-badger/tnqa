@@ -7,7 +7,7 @@ let(:user2) {create(:user)}
 let(:question) {create(:question, user: user)}
 let(:question2) {create(:question, user: user2)}
 
-  scenario 'owner update question' do
+  scenario 'owner updates question' do
     sign_in(user)
 
     visit question_path(question)
@@ -20,14 +20,14 @@ let(:question2) {create(:question, user: user2)}
     expect(page).to have_content("Your question has been updated")
   end
 
-  scenario 'auth user update question' do
+  scenario 'auth user updates question' do
     sign_in(user)
 
     visit question_path(question2)
     expect(page).to_not have_content("Edit")
   end
 
-  scenario 'non-auth user update question' do
+  scenario 'non-auth user updates question' do
     visit question_path(question)
     expect(page).to_not have_content("Edit")
   end
