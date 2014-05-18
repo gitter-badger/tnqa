@@ -1,7 +1,9 @@
-h2
-  =@question.title
-p
-  =@question.content
+h2= @question.title
+p= @question.content
+p Attachments:
+ul
+  - @question.attachments.each do |a|
+    li= link_to a.file.identifier, a.file.url
 
 - if @question.user == current_user
     small= link_to 'Edit', edit_question_path(@question)
@@ -10,9 +12,15 @@ p
   = render 'answers'
 
 = form_for [@question, @answer], remote: true do |f|
-  .form-group
-   = f.label :content, 'Your answer'
-   .answer_errors
-   = f.text_area :content, class: 'form-control'
-  .actions
-   = f.submit 'Create', class: 'btn btn-danger'
+  p 
+    = f.label :content, 'Your answer'
+    .answer_errors
+    = f.text_area :content
+
+  p
+    = f.fields_for :attachments do |a|
+      = a.label :file
+      = a.file_field :file
+
+  
+  p= f.submit 'Create'

@@ -8,5 +8,6 @@ class User < ActiveRecord::Base
   validates :name, presence: true, length: {in: 3..200}
   
   has_many :questions
+  has_many :answers
 
 end

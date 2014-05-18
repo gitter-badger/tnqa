@@ -32,6 +32,8 @@ gem 'kaminari'
 gem 'bootstrap-kaminari-views'
 gem 'bootstrap-sass', '~> 3.1.1'
 gem "slim-rails"
+gem 'carrierwave'
+gem 'remotipart'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.

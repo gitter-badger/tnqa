@@ -1,0 +1,18 @@
+= form_for @question do |f|
+  p 
+  .form-group
+    = f.label :title
+    = f.text_field :title, class: 'form-control'
+  p 
+  .form-group
+    = f.label :content
+    = f.text_area :content, class: 'form-control'
+  p Attachments:
+  p
+    = f.fields_for :attachments do |a|
+      = a.label :file
+      = a.file_field :file
+  
+  p 
+  .actions
+    = f.submit "Create", class: 'btn btn-primary'

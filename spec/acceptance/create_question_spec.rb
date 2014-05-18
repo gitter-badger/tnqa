@@ -11,7 +11,7 @@ let!(:user) {create(:user)}
     click_on 'Ask question'
     fill_in 'Title', with: 'my title'
     fill_in 'Content', with: 'my content'
-    click_on 'create'
+    click_on 'Create'
 
     expect(page).to have_content 'Your question successfully created.'
   end
