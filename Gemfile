@@ -42,7 +42,7 @@ group :doc do
 end
 
 group :development, :test do
-  gem 'rspec-rails', '~> 3.0.0.beta'
+  gem 'rspec-rails'
   gem 'shoulda-matchers'
   gem 'faker'
   gem 'database_cleaner'
