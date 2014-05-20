@@ -23,8 +23,8 @@ feature 'User answer', 'to help friends I answer their questions' do
     visit question_path(question)
 
     click_on 'Create'
-
-    expect(page).to have_content "Content can't be blanc"
+    save_and_open_page
+    expect(page).to have_content "Content can't be blank"
 	end
 end
 
