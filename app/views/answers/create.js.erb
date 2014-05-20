@@ -4,5 +4,6 @@
     <% end %>
 <% else %>
     $('.answers').html('<%= j render 'questions/answers' %>');
-    $('#answer_content').val('');
+    $('#new_answer').each (function(){this.reset();
+    });
 <% end %>

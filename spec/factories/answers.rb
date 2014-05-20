@@ -2,7 +2,7 @@
 
 FactoryGirl.define do
   factory :answer do
-    content "notblanc"
+    content "smart answer"
     @question
   end
 

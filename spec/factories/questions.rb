@@ -2,8 +2,8 @@
 
 FactoryGirl.define do
   factory :question do
-    title "notblanc"
-  	content "notblanc"
+    title "notblanc title"
+  	content "notblanc content"
     @user
   end
 
