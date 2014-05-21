@@ -11,16 +11,21 @@ ul
 .answers
   = render 'answers'
 
-= form_for [@question, @answer], remote: true do |f|
+= nested_form_for [@question, @answer], remote: true do |f|
   p 
     = f.label :content, 'Your answer'
     .answer_errors
     = f.text_area :content
 
   p
+    = f.link_to_add "Add a file", :attachments
+
+  p
     = f.fields_for :attachments do |a|
       = a.label :file
       = a.file_field :file
+      = a.link_to_remove "Remove this file"
 
   
+
   p= f.submit 'Create'

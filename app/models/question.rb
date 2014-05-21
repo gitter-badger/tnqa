@@ -7,6 +7,5 @@ class Question < ActiveRecord::Base
   has_many :answers
   has_many :attachments, as: :attachmentable
 
-  accepts_nested_attributes_for :attachments
-
+  accepts_nested_attributes_for :attachments, :allow_destroy => true
 end
