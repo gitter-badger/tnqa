@@ -3,7 +3,8 @@
 FactoryGirl.define do
   factory :answer do
     content "smart answer"
-    @question
+    user
+    question
   end
 
  factory :invalid_answer, class: Answer do

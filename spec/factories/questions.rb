@@ -4,7 +4,7 @@ FactoryGirl.define do
   factory :question do
     title "notblanc title"
   	content "notblanc content"
-    @user
+    user
   end
 
  factory :invalid_question, class: Question do
