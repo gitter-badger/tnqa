@@ -1,5 +1,5 @@
 class QuestionsController < ApplicationController
-  
+
 
   before_action :authenticate_user!, only: [:create, :new, :update, :destroy]
 
@@ -10,7 +10,7 @@ class QuestionsController < ApplicationController
   def show
     question
     @answer = @question.answers.build
-    @answer.attachments.build
+    #@answer.attachments.build
   end
 
   def new
@@ -32,12 +32,12 @@ class QuestionsController < ApplicationController
   end
 
   def update
-    question
-    if question.update(question_params)
-      redirect_to @question, notice: "Your question has been updated"
-    else
-      render :edit
-    end
+    question.update(question_params)
+    # if question.update(question_params)
+    #   redirect_to @question, notice: "Your question has been updated"
+    # else
+    #   render :edit
+    # end
   end
 
   def destroy

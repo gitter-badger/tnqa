@@ -102,37 +102,37 @@ describe QuestionsController do
 
     context 'valid attributes' do
       it "assigns the requested question to @question" do
-        patch :update, id: question, question: attributes_for(:question)
+        patch :update, id: question, question: attributes_for(:question), format: :js
         expect(assigns(:question)).to eq question
       end
 
       it 'changes question attributes' do
-        patch :update, id: question, question: { title: 'new title', content: 'new content'}
+        patch :update, id: question, question: { title: 'new title', content: 'new content'}, format: :js
         question.reload
         expect(question.title).to eq 'new title'
-        expect(question.title).to eq('new title')
+        expect(question.content).to eq('new content')
       end
 
-      it 'redirects to the updated question' do
-        patch :update, id: question, question: attributes_for(:question)
-        expect(response).to redirect_to question
-      end
-    end
+    #   it 'redirects to the updated question' do
+    #     patch :update, id: question, question: attributes_for(:question), format: :js
+    #     expect(response).to redirect_to question
+    #   end
+     end
 
     context 'invalid attributes' do
-      before {patch :update, id: question, question: { title: 'new title', content: nil} }
+      before {patch :update, id: question, question: { title: 'new title', content: nil}, format: :js }
 
       it 'does not change q attributes' do
         question.reload
-        expect(question.title).to_not eq('new title')
-        expect(question.title).to_not eq nil
+        expect(question.title).to eq('notblanc title')
+        expect(question.content).to eq "notblanc content"
       end
 
-      it "re-renders edit view" do
-        expect(response).to render_template :edit
-      end
-    end
-  end
+  #     it "re-renders edit view" do
+  #       expect(response).to render_template :edit
+  #     end
+     end
+   end
 
   describe 'DELETE #destroy' do
     before { sign_in user; question }

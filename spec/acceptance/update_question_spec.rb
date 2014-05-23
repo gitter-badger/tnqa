@@ -7,17 +7,17 @@ let(:user2) {create(:user)}
 let(:question) {create(:question, user: user)}
 let(:question2) {create(:question, user: user2)}
 
-  scenario 'owner updates question' do
+  scenario 'owner updates question', js: true do
     sign_in(user)
 
     visit question_path(question)
     click_on 'Edit'
-    fill_in("Title", with: "My Title")
-    fill_in("Content", with: 'My Body')
-    click_on 'Update'
-    expect(question.reload.title).to eq "My Title"
-    expect(question.reload.content).to eq 'My Body'
-    expect(page).to have_content("Your question has been updated")
+    fill_in("Question", with: "new question")
+    click_on 'Save'
+
+    expect(page).not_to have_content question.content
+    expect(page).to have_content("new question")
+    expect(page).to_not have_selector 'textarea'
   end
 
   scenario 'auth user updates question' do

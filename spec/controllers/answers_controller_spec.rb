@@ -1,7 +1,13 @@
 require 'spec_helper'
 
 describe AnswersController do
-  let!(:question) { create :question }
+  let!(:question) {create(:question, user: user)}
+
+  let!(:user) { create :user }
+  let!(:user2) { create :user }
+
+  let!(:answer) { create(:answer, question: question, user: user) }
+  let!(:answer2) { create(:answer, question: question, user: user2) }
 
 
 	describe 'POST #create' do
@@ -30,7 +36,6 @@ describe AnswersController do
 	end
 
 describe 'PATCH #update' do
-  let(:answer) { create(:answer, question: question) }
 
   it 'assings the requested answer to @answer' do
     patch :update, id: answer, question_id: question, answer: attributes_for(:answer), format: :js
@@ -41,9 +46,16 @@ describe 'PATCH #update' do
     patch :update, id: answer, question_id: question, answer: attributes_for(:answer), format: :js
     expect(assigns(:question)).to eq question
   end
-  
+
+   it 'no changes answer attributes' do
+    patch :update, id: answer2, question_id: question, user_id: user, answer: { content: 'new body'}, format: :js
+    #expect { patch :update, id: answer2, question_id: question, user_id: user, answer: { content: 'new body'}, format: :js }.to_not change(Answer, content)
+    answer.reload
+    expect(answer.content).to eq 'smart answer'
+   end
+
   it 'changes answer attributes' do
-    patch :update, id: answer, question_id: question, answer: { content: 'new body'}, format: :js
+    patch :update, id: answer, question_id: question, user_id: user, answer: { content: 'new body'}, format: :js
     answer.reload
     expect(answer.content).to eq 'new body'
   end

@@ -16,6 +16,7 @@ end
 
 scenario 'user adds file when answers', js: true do
 	fill_in 'Your answer', with: 'My answer'
+	click_on 'Add a file'
 	attach_file 'File', "#{Rails.root}/spec/spec_helper.rb"
 	click_on 'Create'
 

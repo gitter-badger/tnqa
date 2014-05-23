@@ -1,4 +1,4 @@
-= form_for @question do |f|
+= nested_form_for @question, remote: true, html: { id: "edit-question-#{@question.id}"} do |f|
 	div class="form-group" 
 	 = f.label :title
 	 = f.text_field :title, class: 'form-control'
@@ -8,6 +8,6 @@
 	div class="actions"
 	 = f.submit 'Update', class: 'btn btn-primary'
 
-= form_for @question, method: :delete do |f|
+= nested_form_for @question, method: :delete, remote: true, html: { id: "edit-question-#{@question.id}"} do |f|
 	div class="actions" 
 	 = f.submit 'Delete', class: 'btn btn-danger'
