@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140520201801) do
+ActiveRecord::Schema.define(version: 20140525143144) do
 
   create_table "answers", force: true do |t|
     t.text     "content"
@@ -34,6 +34,18 @@ ActiveRecord::Schema.define(version: 20140520201801) do
 
   add_index "attachments", ["attachmentable_id"], name: "index_attachments_on_attachmentable_id"
   add_index "attachments", ["attachmentable_type"], name: "index_attachments_on_attachmentable_type"
+
+  create_table "comments", force: true do |t|
+    t.text     "content"
+    t.integer  "user_id"
+    t.integer  "commentable_id"
+    t.string   "commentable_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "comments", ["commentable_id", "commentable_type"], name: "index_comments_on_commentable_id_and_commentable_type"
+  add_index "comments", ["user_id"], name: "index_comments_on_user_id"
 
   create_table "questions", force: true do |t|
     t.string   "title"

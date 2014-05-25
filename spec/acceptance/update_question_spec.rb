@@ -17,7 +17,6 @@ let(:question2) {create(:question, user: user2)}
 
     expect(page).not_to have_content question.content
     expect(page).to have_content("new question")
-    expect(page).to_not have_selector 'textarea'
   end
 
   scenario 'auth user updates question' do

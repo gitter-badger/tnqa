@@ -6,6 +6,7 @@ class Question < ActiveRecord::Base
   belongs_to :user
   has_many :answers
   has_many :attachments, as: :attachmentable
+  has_many :comments, as: :commentable
 
   accepts_nested_attributes_for :attachments, allow_destroy: true
 end
