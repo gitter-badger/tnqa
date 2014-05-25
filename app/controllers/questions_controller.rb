@@ -1,6 +1,5 @@
 class QuestionsController < ApplicationController
 
-
   before_action :authenticate_user!, only: [:create, :new, :update, :destroy]
 
   def index
@@ -42,8 +41,10 @@ class QuestionsController < ApplicationController
 
   def destroy
     question
+    #if @answer.user == current_user
     question.destroy
     redirect_to questions_path, notice: "Your question has been deleted"
+    #end
   end
 
 

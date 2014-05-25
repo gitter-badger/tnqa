@@ -1,6 +1,6 @@
 require_relative 'acceptance_helper'
 
-feature 'Сomments', 'commenting answers and questions' do
+feature 'Сreate comments', 'commenting answers and questions' do
 
   let!(:user) { create(:user) }
   let!(:question) { create(:question, user: user ) }
@@ -13,7 +13,7 @@ feature 'Сomments', 'commenting answers and questions' do
     end
 
     describe "comment for answer" do
-      
+
       scenario 'sees form to create comment' do
         within "#answer_#{answer.id}" do
           expect(page).to have_selector 'textarea#comment_body'

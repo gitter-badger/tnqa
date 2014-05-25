@@ -1,7 +1,5 @@
 class AnswersController < ApplicationController
 
-
-
   def create
     @question = Question.find(params[:question_id])
     @answer = @question.answers.create(answer_params)  do |answer|
@@ -15,6 +13,13 @@ class AnswersController < ApplicationController
     @answer.update(answer_params)
     #end
     @question = @answer.question
+  end
+
+  def destroy
+    @answer = Answer.find(params[:id])
+    #if @answer.user == current_user
+    @answer.destroy
+    #end
   end
 
   private
