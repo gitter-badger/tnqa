@@ -16,7 +16,7 @@ feature 'Сreate comments', 'commenting answers and questions' do
 
       scenario 'sees form to create comment' do
         within "#answer_#{answer.id}" do
-          expect(page).to have_selector 'textarea#comment_body'
+          expect(page).to have_selector 'textarea#comment_content'
         end
       end
 
@@ -52,7 +52,7 @@ feature 'Сreate comments', 'commenting answers and questions' do
 
       scenario 'sees form to create comment' do
         within ".question" do
-          expect(page).to have_selector 'textarea#comment_body'
+          expect(page).to have_selector 'textarea#comment_content'
         end
       end
 
@@ -88,6 +88,6 @@ feature 'Сreate comments', 'commenting answers and questions' do
   scenario "non-auth user tries comment" do
     visit question_path(question)
 
-    expect(page).to_not have_selector 'textarea#comment_body'
+    expect(page).to_not have_selector 'textarea#comment_content'
   end
 end

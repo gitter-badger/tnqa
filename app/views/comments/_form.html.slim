@@ -1,3 +1,3 @@
-= simple_form_for [commentable, comment], remote: true do |f|
-  = f.input :body, label: 'Your Comment'
-  = f.button :submit, 'Post Your Comment'
+= form_for [commentable, comment], remote: true do |f|
+  = f.text_area :content, label: 'Your Comment'
+  = f.submit 'Post Your Comment'
