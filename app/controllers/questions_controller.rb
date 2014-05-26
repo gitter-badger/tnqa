@@ -3,7 +3,11 @@ class QuestionsController < ApplicationController
   before_action :authenticate_user!, only: [:create, :new, :update, :destroy]
 
   def index
-    @questions = Question.all.page params[:page]
+    if params[:tag]
+      @questions = Question.tagged_with(params[:tag]).page(params[:page])
+    else
+      @questions = Question.all.page(params[:page])
+    end
   end
 
   def show

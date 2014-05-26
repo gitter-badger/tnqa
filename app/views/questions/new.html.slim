@@ -7,10 +7,14 @@
   .form-group
     = f.label :content
     = f.text_area :content, class: 'form-control'
-  p Attachments:
+  div.form-group
+    = f.label :tag_list, 'Tags', class: "col-sm-2 control-label"
+    div.col-sm-10
+      = f.text_field :tag_list, autofocus: true, class: "form-control", placeholder: "At least one tag as (ruby qa scala), max 5 tags"    
+  p
   p
     = f.fields_for :attachments do |a|
-      = a.label :file
+      = a.label :file, "Add file"
       = a.file_field :file
   
   p 

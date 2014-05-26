@@ -7,9 +7,10 @@ Tnqa::Application.routes.draw do
       resources :comments
     end
   end
-  
+
   resources :comments, only: [:destroy, :update]
+
+  get 'tags/:tag', to: 'questions#index', as: :tag
+
   root :to => "questions#index"
-
-
 end
