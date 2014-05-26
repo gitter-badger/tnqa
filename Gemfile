@@ -53,6 +53,9 @@ group :development, :test do
   gem 'launchy'
   gem 'pry-rails'
   gem 'capybara-webkit'
+  gem "better_errors"
+  gem "binding_of_caller"
+  gem 'xray-rails'
 end
 
 # Use ActiveModel has_secure_password

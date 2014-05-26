@@ -1,13 +1,15 @@
 require_relative 'acceptance_helper'
+include ActionView::RecordIdentifier
 
 feature 'Сreate comments', 'commenting answers and questions' do
 
-  let!(:user) { create(:user) }
-  let!(:question) { create(:question, user: user ) }
-  let!(:answer) { create(:answer, question: question, user: user) }
+  let(:user) { create(:user) }
+  let(:question) { create(:question, user: user ) }
+  let(:answer) { create(:answer, question: question, user: user) }
 
   describe 'auth user try to comment' do
     background do
+      answer
       sign_in user
       visit question_path(question)
     end
@@ -16,33 +18,34 @@ feature 'Сreate comments', 'commenting answers and questions' do
 
       scenario 'sees form to create comment' do
         within "#answer_#{answer.id}" do
+          #binding.pry
           expect(page).to have_selector 'textarea#comment_content'
         end
       end
 
       scenario 'comment with valid data', js: true do
         within "#answer_#{answer.id}" do
-          fill_in 'Your Comment', with: 'My comment'
-          click_on 'Save Your Comment'
+          fill_in 'Your comment', with: 'My answer comment'
+          click_on 'Post Your Comment'
         end
 
         expect(current_path).to eq question_path(question)
         within "#answer_#{answer.id} .comments" do
-          expect(page).to have_content 'My comment'
+          expect(page).to have_content 'My answer comment'
         end
         within "#answer_#{answer.id} form#new_comment" do
-          expect(page).to_not have_content 'My comment'
+          expect(page).to_not have_content 'My answer comment'
         end
       end
 
       scenario 'comment with invalid data', js: true do
         within "#answer_#{answer.id}" do
-          fill_in 'Your Comment', with: ''
-          click_on 'Save Your Comment'
+          fill_in 'Your comment', with: ''
+          click_on 'Post Your Comment'
         end
 
         expect(current_path).to eq question_path(question)
-        within "#answer_#{answer.id} form#new_comment" do
+        within "#answer_#{answer.id} form#comments_" + dom_id(answer) do
           expect(page).to have_content "Content can't be blank"
         end
       end
@@ -57,9 +60,9 @@ feature 'Сreate comments', 'commenting answers and questions' do
       end
 
       scenario 'comment with valid data', js: true do
-        within '.question' do
-          fill_in 'Your Comment', with: 'My comment'
-          click_on 'Save Your Comment'
+        within "#comments_" + dom_id(question) do
+          fill_in 'Your comment', with: 'My comment'
+          click_on 'Post Your Comment'
         end
 
         expect(current_path).to eq question_path(question)
@@ -73,8 +76,8 @@ feature 'Сreate comments', 'commenting answers and questions' do
 
       scenario 'comment with invalid data', js: true do
         within '.question' do
-          fill_in 'Your Comment', with: ''
-          click_on 'Save Your Comment'
+          fill_in 'Your comment', with: ''
+          click_on 'Post Your Comment'
         end
 
         expect(current_path).to eq question_path(question)

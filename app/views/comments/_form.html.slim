@@ -1,3 +1,4 @@
-= form_for [commentable, comment], remote: true do |f|
-  = f.text_area :content, label: 'Your Comment'
-  = f.submit 'Post Your Comment'
+= form_for [commentable, comment], remote: true, html: {id: "comments_" + dom_id(commentable)} do |f|
+  p= f.label :content, 'Your comment'
+  p= f.text_area :content
+  p= f.submit 'Post Your Comment'

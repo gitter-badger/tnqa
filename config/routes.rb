@@ -8,7 +8,11 @@ Tnqa::Application.routes.draw do
     end
   end
 
-  resources :comments, only: [:destroy, :update]
+  resources :answers do
+    resources :comments
+  end
+
+  resources :comments
 
   get 'tags/:tag', to: 'questions#index', as: :tag
 

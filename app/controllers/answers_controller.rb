@@ -1,5 +1,7 @@
 class AnswersController < ApplicationController
 
+  before_action :authenticate_user!, only: [:create, :new, :update, :destroy]
+
   def create
     @question = Question.find(params[:question_id])
     @answer = @question.answers.create(answer_params)  do |answer|
@@ -20,6 +22,8 @@ class AnswersController < ApplicationController
     #if @answer.user == current_user
     @answer.destroy
     #end
+    @question = @answer.question
+    redirect_to questions_path, notice: "Your answer has been deleted"
   end
 
   private
