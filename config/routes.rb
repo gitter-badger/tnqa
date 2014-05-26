@@ -1,6 +1,8 @@
 Tnqa::Application.routes.draw do
   devise_for :users, :controllers => { registrations: 'registrations' }
 
+  get 'tags/:tag', to: 'questions#index', as: :tag
+
   resources :questions do
     resources :comments
     resources :answers do
@@ -14,7 +16,6 @@ Tnqa::Application.routes.draw do
 
   resources :comments
 
-  get 'tags/:tag', to: 'questions#index', as: :tag
 
   root :to => "questions#index"
 end

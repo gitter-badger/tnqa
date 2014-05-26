@@ -33,7 +33,6 @@ describe "Authenticated user" do
 
   	expect(page).not_to have_content answer.content
   	expect(page).to have_content 'editing answer'
-  	expect(page).to_not have_selector 'textarea'
    end
   end
 

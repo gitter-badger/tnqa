@@ -2,15 +2,15 @@
   p 
   .form-group
     = f.label :title
-    = f.text_field :title, class: 'form-control'
+    = f.text_field :title, autofocus: true, class: 'form-control', placeholder: "Enter Q title"
   p 
   .form-group
     = f.label :content
-    = f.text_area :content, class: 'form-control'
-  div.form-group
-    = f.label :tag_list, 'Tags', class: "col-sm-2 control-label"
-    div.col-sm-10
-      = f.text_field :tag_list, autofocus: true, class: "form-control", placeholder: "At least one tag as (ruby qa scala), max 5 tags"    
+    = f.text_area :content, class: 'form-control', placeholder: "Your Q please"
+  p
+  .form-group
+    = f.label :tag_list, 'Tags'
+    = f.text_field :tag_list, class: "form-control", placeholder: "At least one tag"    
   p
   p
     = f.fields_for :attachments do |a|

@@ -5,9 +5,9 @@
       p= comment.content
       - if user_signed_in? and comment.user == current_user
         .meta_block
-          small= link_to 'Edit', '', class: 'js-edit-comment-link', data: { comment_id: comment.id }
+          small= link_to 'Edit C', '', class: 'js-edit-comment-link', data: { comment_id: comment.id }
         .meta_block
-          small= link_to 'Delete', comment_path(comment), remote: true, method: :delete, data: {confirm: 'Are you sure?'}
+          small= link_to 'Delete C', comment_path(comment), remote: true, method: :delete, data: {confirm: 'Are you sure?'}
 
 - if user_signed_in?
   .new_comment_form

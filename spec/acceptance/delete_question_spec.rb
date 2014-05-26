@@ -10,7 +10,6 @@ let(:question2) {create(:question, user: user2)}
     sign_in(user)
 
     visit question_path(question)
-    click_on 'Edit'
     click_on 'Delete'
     expect(page).to have_content("Your question has been deleted")
   end

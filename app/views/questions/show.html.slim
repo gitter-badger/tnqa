@@ -1,27 +1,30 @@
-.question id="question_#{@question.id}"
+.question id="question_#{@question.id}" style="border: 1px solid green;"
   h4= @question.title
   p.content= @question.content
-  p=raw @question.tag_list.map { |t| link_to t, tag_path(t), class: "label label-primary" }.join(' ')
   p
   ul
     - @question.attachments.each do |a|
       li= link_to a.file.identifier, a.file.url
-
   p
-    | Comment your question
-    .comments
-      = render partial: 'comments/list', locals: {commentable: @question}
+    | Tags: 
+    = raw @question.tag_list.map { |t| link_to t, tag_path(t) }.join(', ')
+
 
   - if @question.user == current_user
       .meta_block
-        small= link_to 'Edit', '', class: 'edit-question-link', data: { question_id: @question.id }
+        small= link_to 'Edit Q', '', class: 'edit-question-link', data: { question_id: @question.id }
       .meta_block
-        small= link_to 'Delete', question_path(@question), method: :delete, data: {confirm: 'Are you sure?'}
+        small= link_to 'Delete Q', question_path(@question), method: :delete, data: {confirm: 'Are you sure?'}
       p
         = form_for @question, remote: true, html: { id: "edit-question-#{@question.id}"} do |f|
           = f.label :content, "Question"
           = f.text_area :content
           = f.submit 'Save'
+
+  p
+    | ***Комментарии к вопросу:
+    .comments
+      = render partial: 'comments/list', locals: {commentable: @question}
 
   .answers
     = render 'answers'

@@ -1,0 +1,7 @@
+h3
+  - if user_signed_in?
+    small= link_to 'Ask question', new_question_path
+= render @questions
+.raw
+  .col-md-12
+    = paginate @questions
