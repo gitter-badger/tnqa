@@ -10,13 +10,15 @@
 
 
   - if @question.user == current_user
-      .meta_block
-        small= link_to 'редактировать вопрос / ', '', class: 'edit-question-link', data: { question_id: @question.id }
-        small= link_to ' удалить вопрос', question_path(@question), method: :delete, data: {confirm: 'Are you sure?'}
+        small= link_to 'E.Q. / ', '', class: 'edit-question-link', data: { question_id: @question.id }
+        small= link_to ' D.Q.', question_path(@question), method: :delete, data: {confirm: 'Are you sure?'}
+        
         = form_for @question, remote: true, html: { id: "edit-question-#{@question.id}"} do |f|
-          small= f.label :content, "внесите изменения"
-          .small= f.text_area :content
-          small= f.submit 'сохранить'
+          p
+          .form-group
+            small= f.label :content, "внесите изменения"
+            small= f.text_area :content, class: "form-control input-sm", placeholder: "ваши изменения"
+            small= f.submit 'сохранить', class: "btn btn-success btn-xs"
 
   p
     .comments

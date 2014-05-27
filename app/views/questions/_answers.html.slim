@@ -1,20 +1,22 @@
 - @question.answers.each do |answer|
   - if answer.persisted?
+    hr
     .answer id="answer_#{answer.id}" style="color: #696969;"
       p= answer.content
       ul
         - answer.attachments.each do |a|
           li= link_to a.file.file.identifier, a.file.url
       - if answer.user == current_user
-        .meta_block
-          small= link_to 'редактировать ответ / ', '', class: 'edit-answer-link', data: { answer_id: answer.id }
-          small= link_to ' удалить ответ', question_answer_path(answer.question, answer), method: :delete, data: {confirm: 'Are you sure?'}
+        small= link_to 'E.A. / ', '', class: 'edit-answer-link', data: { answer_id: answer.id }
+        small= link_to ' D.A.', question_answer_path(answer.question, answer), method: :delete, data: {confirm: 'Вы хотите удалить ответ?'}
 
         
         = nested_form_for [@question, answer], remote: true, html: { id: "edit-answer-#{answer.id}"} do |f|
-          small= f.label :content, "внесите изменения"
-          .small= f.text_area :content
-          small= f.submit 'сохранить'
+          p
+          .form-group
+            small= f.label :content, "внесите изменения"
+            small= f.text_area :content, class: "form-control input-sm", placeholder: "ваши изменения"
+            small= f.submit 'сохранить', class: "btn btn-success btn-xs"
 
       p
         .comments style="font-size: 80%;"
