@@ -6,7 +6,7 @@ feature 'Signing in', 'log in to ask' do
 
   scenario 'Existing user try to log in' do
     sign_in(user)
-    click_on "Sign Out"
+    click_on "Выйти"
     expect(page.current_path).to eq root_path
   end
  end

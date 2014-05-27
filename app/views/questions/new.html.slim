@@ -2,21 +2,18 @@
   p 
   .form-group
     = f.label :title, "заголовок вопроса"
-    = f.text_field :title, autofocus: true, class: 'form-control', placeholder: "Enter Q title"
+    = f.text_field :title, autofocus: true, class: 'form-control', placeholder: "заголовок"
   p 
   .form-group
     = f.label :content, "текст вопроса"
-    = f.text_area :content, class: 'form-control', placeholder: "Your Q please"
+    = f.text_area :content, class: 'form-control', placeholder: "вопрос"
   p
   .form-group
     = f.label :tag_list, 'добавьте тэги (через запятую)'
-    = f.text_field :tag_list, class: "form-control", placeholder: "At least one tag"    
-  p
+    = f.text_field :tag_list, class: "form-control", placeholder: "минимум один тэг"    
   p
     = f.fields_for :attachments do |a|
-      = a.label :file, "Add file"
       = a.file_field :file
-  
   p 
   .actions
     = f.submit "Создать вопрос", class: 'btn btn-primary'

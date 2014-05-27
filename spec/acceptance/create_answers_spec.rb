@@ -9,8 +9,8 @@ feature 'User answer', 'to help friends I answer their questions' do
 	sign_in(user)
 	visit question_path(question)
 
-	fill_in 'Your answer', with: 'My answer'
-	click_on 'Create'
+	fill_in 'ваш ответ', with: 'My answer'
+	click_on 'Добавьте ответ'
 
 	expect(current_path).to eq question_path(question)
 	within '.answers' do
@@ -22,7 +22,7 @@ feature 'User answer', 'to help friends I answer their questions' do
     sign_in(user)
     visit question_path(question)
 
-    click_on 'Create'
+    click_on 'Добавьте ответ'
     expect(page).to have_content "Content can't be blank"
 	end
 end

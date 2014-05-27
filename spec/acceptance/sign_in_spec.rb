@@ -13,7 +13,7 @@ feature 'Signing in', 'log in to ask' do
     visit new_user_session_path
     fill_in 'Email', with: user.email
     fill_in 'Password', with: 'invalidpassword'
-    click_on 'Sign in'
+    click_on 'Войти'
     expect(page).to have_content 'Invalid email or password.'
   end
 
@@ -21,7 +21,7 @@ feature 'Signing in', 'log in to ask' do
     visit new_user_session_path
     fill_in 'Email', with: 'invalid@user.com'
     fill_in 'Password', with: 'invalidpassword'
-    click_on 'Sign in'
+    click_on 'Войти'
     expect(page).to have_content 'Invalid email or password.'
   end
 end

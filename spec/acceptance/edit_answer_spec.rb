@@ -9,7 +9,7 @@ feature 'Answer editing', 'an author can edit' do
 
 	scenario 'non-auth user edits answer' do
 		visit question_path(question)
-		expect(page).to_not have_link "Edit"
+		expect(page).to_not have_link "редактировать ответ / "
 	end
 
 describe "Authenticated user" do
@@ -21,15 +21,15 @@ describe "Authenticated user" do
 		visit question_path(question)
 		within '.answers' do
 		#binding.pry
-		expect(page).to have_link "Edit"
+		expect(page).to have_link "редактировать ответ / "
 		end
   end
   scenario 'owner edits answer', js: true do
   	visit question_path(question)
   	within '.answers' do
-  		click_on "Edit"
-  	  fill_in "Answer", with: "editing answer"
-  	  click_on "Save"
+  		click_on "редактировать ответ / "
+  	  fill_in "внесите изменения", with: "editing answer"
+  	  click_on "сохранить"
 
   	expect(page).not_to have_content answer.content
   	expect(page).to have_content 'editing answer'
@@ -39,7 +39,7 @@ describe "Authenticated user" do
   scenario 'auth user edits answer', js: true do
 		visit question_path(question2)
     within '.answers' do
-		 expect(page).to_not have_link "Edit"
+		 expect(page).to_not have_link "редактировать ответ / "
    end
   end
  end

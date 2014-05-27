@@ -1,12 +1,14 @@
 
 - commentable.comments.each do |comment|
   - if comment.persisted?
-    div id="comment_#{comment.id}" style="color: #BEBEBE; font-size: 90%; margin: 0;"
+    div id="comment_#{comment.id}" style="color: #BEBEBE; font-size: 80%"
       p= comment.content
       - if user_signed_in? and comment.user == current_user
         .meta_block
           small= link_to 'удалить комментарий', comment_path(comment), remote: true, method: :delete, data: {confirm: 'Are you sure?'}
 
 - if user_signed_in?
-  .new_comment_form
+  small= link_to( 'добавить комментарий', '#', {onclick: "$('#com_#{dom_id(commentable)}').fadeIn(); $(this).fadeOut();", id: "link_#{dom_id(commentable)}"})
+  .new_comment_form style="display: none;" id="com_#{dom_id(commentable)}"
     = render partial: 'comments/form', locals: {commentable: commentable, comment: commentable.comments.build}
+    small= link_to( 'свернуть форму', '#', {onclick: "$('#com_#{dom_id(commentable)}').fadeOut(); $('#link_#{dom_id(commentable)}').fadeIn();"})

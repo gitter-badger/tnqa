@@ -9,8 +9,8 @@
 	 = f.label :tag_list, "Tags (separated by commas)"
 	 = f.text_field :tag_list, class: 'form-control'
 	div class="actions"
-	 = f.submit 'Update', class: 'btn btn-primary'
+	 = f.submit 'измениять вопрос', class: 'btn btn-primary'
 
 = nested_form_for @question, method: :delete, remote: true, html: { id: "edit-question-#{@question.id}"} do |f|
 	div class="actions" 
-	 = f.submit 'Delete', class: 'btn btn-danger'
+	 = f.submit 'удалить вопрос', class: 'btn btn-danger'

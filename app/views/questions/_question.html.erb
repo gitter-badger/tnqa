@@ -4,7 +4,7 @@
     <h4><%= link_to question.title, question %></h4>
     <p class="text-muted"><%= truncate(question.content, length: 185) { link_to "Continue", question } %></p>
     <p> 
-     <%= raw question.tag_list.map { |t| link_to t, tag_path(t), class: "label label-primary" }.join(', ') %>
+     <%= raw question.tag_list.map { |t| link_to t, tag_path(t), class: "label label-primary" }.join(' ') %>
     </p> 
   </div>
 </div>

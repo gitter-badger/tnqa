@@ -10,11 +10,11 @@
           small= link_to 'редактировать ответ / ', '', class: 'edit-answer-link', data: { answer_id: answer.id }
           small= link_to ' удалить ответ', question_answer_path(answer.question, answer), method: :delete, data: {confirm: 'Are you sure?'}
 
-        p
-          = nested_form_for [@question, answer], remote: true, html: { id: "edit-answer-#{answer.id}"} do |f|
-            = f.label :content, "Answer"
-            = f.text_area :content
-            = f.submit 'Save'
+        
+        = nested_form_for [@question, answer], remote: true, html: { id: "edit-answer-#{answer.id}"} do |f|
+          small= f.label :content, "внесите изменения"
+          .small= f.text_area :content
+          small= f.submit 'сохранить'
 
       p
         .comments style="font-size: 80%;"
