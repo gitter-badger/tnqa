@@ -1,4 +1,8 @@
 = form_for [commentable, comment], remote: true, html: {id: "comments_" + dom_id(commentable)} do |f|
-  p= f.label :content, 'Your comment'
-  p= f.text_area :content
-  p= f.submit 'Post Your Comment'
+
+  p
+  .form-group
+   = f.text_area :content, class: "form-control input-sm", placeholder: "ваш комментарий"
+  p
+  .actions
+   = f.submit 'Добавьте комментарий', class: "btn btn-default btn-xs"

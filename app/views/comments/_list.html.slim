@@ -1,13 +1,11 @@
 
 - commentable.comments.each do |comment|
   - if comment.persisted?
-    div id="comment_#{comment.id}"
+    div id="comment_#{comment.id}" style="color: #BEBEBE; font-size: 90%; margin: 0;"
       p= comment.content
       - if user_signed_in? and comment.user == current_user
         .meta_block
-          small= link_to 'Edit C', '', class: 'js-edit-comment-link', data: { comment_id: comment.id }
-        .meta_block
-          small= link_to 'Delete C', comment_path(comment), remote: true, method: :delete, data: {confirm: 'Are you sure?'}
+          small= link_to 'удалить комментарий', comment_path(comment), remote: true, method: :delete, data: {confirm: 'Are you sure?'}
 
 - if user_signed_in?
   .new_comment_form

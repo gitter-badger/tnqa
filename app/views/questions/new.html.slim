@@ -1,15 +1,15 @@
 = form_for @question do |f|
   p 
   .form-group
-    = f.label :title
+    = f.label :title, "заголовок вопроса"
     = f.text_field :title, autofocus: true, class: 'form-control', placeholder: "Enter Q title"
   p 
   .form-group
-    = f.label :content
+    = f.label :content, "текст вопроса"
     = f.text_area :content, class: 'form-control', placeholder: "Your Q please"
   p
   .form-group
-    = f.label :tag_list, 'Tags'
+    = f.label :tag_list, 'добавьте тэги (через запятую)'
     = f.text_field :tag_list, class: "form-control", placeholder: "At least one tag"    
   p
   p
@@ -19,4 +19,4 @@
   
   p 
   .actions
-    = f.submit "Create", class: 'btn btn-primary'
+    = f.submit "Создать вопрос", class: 'btn btn-primary'

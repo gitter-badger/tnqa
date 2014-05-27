@@ -2,7 +2,7 @@ class Question < ActiveRecord::Base
   validates :title, presence: true, length: {minimum: 5}
   validates :content, presence: true
 
-  paginates_per 10
+  paginates_per 5
 
   belongs_to :user
   has_many :answers, dependent: :destroy
