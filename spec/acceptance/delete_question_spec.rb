@@ -10,7 +10,7 @@ let(:question2) {create(:question, user: user2)}
     sign_in(user)
 
     visit question_path(question)
-    click_on 'Delete'
+    click_on 'D.Q.'
     expect(page).to have_content("Your question has been deleted")
   end
 
@@ -18,11 +18,11 @@ let(:question2) {create(:question, user: user2)}
     sign_in(user)
 
     visit question_path(question2)
-    expect(page).to_not have_content("Edit")
+    expect(page).to_not have_content("D.Q.")
   end
 
   scenario 'non-auth user delete question' do
     visit question_path(question)
-    expect(page).to_not have_content("Edit")
+    expect(page).to_not have_content("D.Q.")
   end
 end

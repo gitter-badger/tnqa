@@ -8,16 +8,18 @@ let!(:user) {create(:user)}
     sign_in(user)
 
     visit root_path
-    click_on 'Ask question'
-    fill_in 'Title', with: 'my title'
-    fill_in 'Content', with: 'my content'
-    click_on 'Create'
+    click_on 'ЗАДАТЬ ВОПРОС'
+    fill_in 'Заголовок', with: 'my title'
+    fill_in 'Вопрос', with: 'my content'
+    fill_in 'Тэги', with: 'my'
+    click_on 'убрать добавление'
+    click_on 'Опубликовать вопрос'
 
     expect(page).to have_content 'Your question successfully created.'
   end
 
   scenario 'non-auth user create q' do
     visit '/questions'
-    expect(page).to_not have_content("Ask question")
+    expect(page).to_not have_content("ЗАДАТЬ ВОПРОС")
   end
 end

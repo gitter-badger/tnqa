@@ -11,9 +11,9 @@ let(:question2) {create(:question, user: user2)}
     sign_in(user)
 
     visit question_path(question)
-    click_on 'Edit'
-    fill_in("Question", with: "new question")
-    click_on 'Save'
+    click_on 'E.Q.'
+    fill_in("внесите изменения", with: "new question")
+    click_on 'сохранить'
 
     expect(page).not_to have_content question.content
     expect(page).to have_content("new question")
@@ -23,11 +23,11 @@ let(:question2) {create(:question, user: user2)}
     sign_in(user)
 
     visit question_path(question2)
-    expect(page).to_not have_content("Edit")
+    expect(page).to_not have_content("E.Q.")
   end
 
   scenario 'non-auth user updates question' do
     visit question_path(question)
-    expect(page).to_not have_content("Edit")
+    expect(page).to_not have_content("E.Q.")
   end
 end

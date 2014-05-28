@@ -15,10 +15,10 @@ background do
 end
 
 scenario 'user adds file when answers', js: true do
-	fill_in 'Your answer', with: 'My answer'
-	click_on 'Add a file'
+	fill_in 'ваш ответ', with: 'My answer'
+	click_on 'добавить файл'
 	attach_file 'File', "#{Rails.root}/spec/spec_helper.rb"
-	click_on 'Create'
+	click_on 'Добавьте ответ'
 
 	within '.answers' do
 		expect(page).to have_link 'spec_helper.rb', href: '/uploads/attachment/file/1/spec_helper.rb'
