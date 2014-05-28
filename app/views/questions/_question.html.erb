@@ -1,6 +1,7 @@
 
 <div class='raw' id='<%= dom_id(question) %>' >
   <div class='col-md-10'>
+    <hr>
     <h4><%= link_to question.title, question %></h4>
     <p class="text-muted"><%= truncate(question.content, length: 185) { link_to "Continue", question } %></p>
     <p> 
