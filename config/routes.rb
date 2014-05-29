@@ -16,6 +16,7 @@ Tnqa::Application.routes.draw do
 
   resources :comments
 
+  resource :votes, only: [:create, :destroy]
 
   root :to => "questions#index"
 end

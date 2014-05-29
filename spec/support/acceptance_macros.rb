@@ -23,4 +23,11 @@ module AcceptanceMacros
     click_button "Sign up"
   end
 
+  def plus_v
+    (vote.quantity + 1).to_s
+  end
+
+  def minus_v
+    (vote.quantity - 1).to_s
+  end
 end

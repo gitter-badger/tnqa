@@ -12,7 +12,6 @@ let!(:user) {create(:user)}
     fill_in 'Заголовок', with: 'my title'
     fill_in 'Вопрос', with: 'my content'
     fill_in 'Тэги', with: 'my'
-    click_on 'убрать добавление'
     click_on 'Опубликовать вопрос'
 
     expect(page).to have_content 'Your question successfully created.'

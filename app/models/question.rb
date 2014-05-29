@@ -8,6 +8,7 @@ class Question < ActiveRecord::Base
   has_many :answers, dependent: :destroy
   has_many :attachments, as: :attachmentable
   has_many :comments, as: :commentable
+  has_many :votes, as: :votable
 
   acts_as_taggable
 

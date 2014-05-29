@@ -1,7 +1,7 @@
 require_relative 'acceptance_helper'
 include ActionView::RecordIdentifier
 
-feature 'Сreate comments', 'commenting answers and questions' do
+feature 'Сreate comments', 'commenting answers and questions', js: true do
 
   let(:user) { create(:user) }
   let(:question) { create(:question, user: user ) }
@@ -18,30 +18,29 @@ feature 'Сreate comments', 'commenting answers and questions' do
 
       scenario 'sees form to create comment' do
         within "#answer_#{answer.id}" do
-          #binding.pry
+          click_on "+ коммент"
           expect(page).to have_selector 'textarea#comment_content'
         end
       end
 
       scenario 'comment with valid data', js: true do
         within "#answer_#{answer.id}" do
-          fill_in 'Your comment', with: 'My answer comment'
-          click_on 'Post Your Comment'
+          click_on "+ коммент"
+          fill_in 'ваш комментарий', with: 'My answer comment'
+          click_on 'Добавьте комментарий'
         end
 
         expect(current_path).to eq question_path(question)
         within "#answer_#{answer.id} .comments" do
           expect(page).to have_content 'My answer comment'
         end
-        within "#answer_#{answer.id} form#new_comment" do
-          expect(page).to_not have_content 'My answer comment'
-        end
       end
 
       scenario 'comment with invalid data', js: true do
         within "#answer_#{answer.id}" do
-          fill_in 'Your comment', with: ''
-          click_on 'Post Your Comment'
+          click_on "+ коммент"
+          fill_in 'ваш комментарий', with: ''
+          click_on 'Добавьте комментарий'
         end
 
         expect(current_path).to eq question_path(question)
@@ -51,46 +50,46 @@ feature 'Сreate comments', 'commenting answers and questions' do
       end
     end
 
-    describe "comment for question" do
+  #   describe "comment for question" do
 
-      scenario 'sees form to create comment' do
-        within ".question" do
-          expect(page).to have_selector 'textarea#comment_content'
-        end
-      end
+  #     scenario 'sees form to create comment' do
+  #       within ".question" do
+  #         click_on "+ коммент"
+  #         expect(page).to have_selector 'textarea#comment_content'
+  #       end
+  #     end
 
-      scenario 'comment with valid data', js: true do
-        within "#comments_" + dom_id(question) do
-          fill_in 'Your comment', with: 'My comment'
-          click_on 'Post Your Comment'
-        end
+  #     scenario 'comment with valid data', js: true do
+  #       within "#comments_" + dom_id(question) do
+  #         fill_in 'Your comment', with: 'My comment'
+  #         click_on 'Post Your Comment'
+  #       end
 
-        expect(current_path).to eq question_path(question)
-        within '.question .comments' do
-          expect(page).to have_content 'My comment'
-        end
-        within '.question form#new_comment' do
-          expect(page).to_not have_content 'My comment'
-        end
-      end
+  #       expect(current_path).to eq question_path(question)
+  #       within '.question .comments' do
+  #         expect(page).to have_content 'My comment'
+  #       end
+  #       within '.question form#new_comment' do
+  #         expect(page).to_not have_content 'My comment'
+  #       end
+  #     end
 
-      scenario 'comment with invalid data', js: true do
-        within '.question' do
-          fill_in 'Your comment', with: ''
-          click_on 'Post Your Comment'
-        end
+  #     scenario 'comment with invalid data', js: true do
+  #       within '.question' do
+  #         fill_in 'Your comment', with: ''
+  #         click_on 'Post Your Comment'
+  #       end
 
-        expect(current_path).to eq question_path(question)
-        within ".question form#new_comment" do
-          expect(page).to have_content "Content can't be blank"
-        end
-      end
-    end
+  #       expect(current_path).to eq question_path(question)
+  #       within ".question form#new_comment" do
+  #         expect(page).to have_content "Content can't be blank"
+  #       end
+  #     end
+  #   end
   end
 
   scenario "non-auth user tries comment" do
     visit question_path(question)
-
-    expect(page).to_not have_selector 'textarea#comment_content'
+    expect(page).to_not have_content '+ коммент'
   end
 end

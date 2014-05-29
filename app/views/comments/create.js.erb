@@ -1,5 +1,7 @@
 <% if @comment.errors.present? %>
-  $('<%= "##{object.class.to_s.downcase}_#{object.id} .comments .new_comment_form" %>').html('<%= j render partial: 'comments/form', locals: {commentable: object, comment: @comment} %>');
+  <% @comment.errors.full_messages.each do |message| %>
+    $('.comment_errors').html('<%= j message %>');
+  <% end %>
 <% else %>
   $('<%= "##{object.class.to_s.downcase}_#{object.id} .comments" %>').html('<%= j render partial: 'comments/list', locals: {commentable: object} %>');
 <% end %>
