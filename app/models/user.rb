@@ -11,8 +11,9 @@ class User < ActiveRecord::Base
   has_many :answers
   has_many :votes
 
-  def vote!(object)
+  def vote!(object, up_down)
     vote = votes.where(votable: object).first_or_initialize
+    vote.score = up_down.to_i
     vote.save!
   end
 
