@@ -36,6 +36,7 @@
     p
       .form-group
         = f.fields_for :attachments do |a|
+          = a.label :file
           = a.file_field :file
           small= a.link_to_remove "удалить файл"
     p

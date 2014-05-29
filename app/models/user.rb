@@ -9,5 +9,21 @@ class User < ActiveRecord::Base
   
   has_many :questions
   has_many :answers
+  has_many :votes
+
+  def vote!(object)
+    vote = votes.where(votable: object).first_or_initialize
+    vote.save!
+  end
+
+  def unvote!(object)
+    if vote = votes.where(votable: object).first
+      vote.destroy!
+    end
+  end
+
+  def voted?(object)
+    votes.where(votable: object).exists?
+  end
 
 end

@@ -1,26 +1,30 @@
-= nested_form_for @question, :html => { :class => "form-horizontal", :role => "form" } do |f|
-  .form-group
-    = f.label :title, "Заголовок", class: "col-sm-2 control-label"
-    .col-sm-10
-      = f.text_field :title, autofocus: true, class: "form-control", placeholder: "заголовок вопроса"
-  .form-group
-    = f.label :content, "Вопрос", class: "col-sm-2 control-label"
-    .col-sm-10
-      = f.text_area :content, class: "form-control", rows: 10, placeholder: "текст вопроса"
-  .form-group
-    = f.label :tag_list, 'Тэги', class: "col-sm-2 control-label"
-    .col-sm-10
-      = f.text_field :tag_list, autofocus: true, class: "form-control", placeholder: "At least one tag, max 5 tags"    
-  hr
-  
-  .form-group
-    label.col-sm-2.control-label Файлы
-    .col-sm-10
-      = f.fields_for :attachments do |a|
-        = a.file_field :file     
-        = a.link_to_remove "убрать добавление"  
-      = f.link_to_add "добавить файл", :attachments, class: "btn btn-primary btn-xs"   
-  hr
-  .form-group
-    .col-sm-offset-2.col-sm-10
-      button.btn.btn-default type='Submit' Опубликовать вопрос
+- if @question.errors.present?
+  - @question.errors.full_messages.each do |message|
+    li= message
+- else
+  = nested_form_for @question, :html => { :class => "form-horizontal", :role => "form" } do |f|
+    .form-group
+      = f.label :title, "Заголовок", class: "col-sm-2 control-label"
+      .col-sm-10
+        = f.text_field :title, autofocus: true, class: "form-control", placeholder: "заголовок вопроса"
+    .form-group
+      = f.label :content, "Вопрос", class: "col-sm-2 control-label"
+      .col-sm-10
+        = f.text_area :content, class: "form-control", rows: 10, placeholder: "текст вопроса"
+    .form-group
+      = f.label :tag_list, 'Тэги', class: "col-sm-2 control-label"
+      .col-sm-10
+        = f.text_field :tag_list, autofocus: true, class: "form-control", placeholder: "At least one tag, max 5 tags"    
+    hr
+    .form-group
+      label.col-sm-2.control-label Файлы
+      .col-sm-10
+        = f.fields_for :attachments do |a|
+          = a.file_field :file     
+          = a.link_to_remove "убрать добавление"  
+        = f.link_to_add "добавить файл", :attachments, class: "btn btn-primary btn-xs"   
+    hr
+    .form-group
+      .col-sm-offset-2.col-sm-10
+        button.btn.btn-default type='Submit' Опубликовать вопрос
+end

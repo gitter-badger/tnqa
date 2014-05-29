@@ -19,7 +19,6 @@ scenario 'user adds file when answers', js: true do
 	click_on 'добавить файл'
 	attach_file 'File', "#{Rails.root}/spec/spec_helper.rb"
 	click_on 'Добавьте ответ'
-
 	within '.answers' do
 		expect(page).to have_link 'spec_helper.rb', href: '/uploads/attachment/file/1/spec_helper.rb'
 	end
