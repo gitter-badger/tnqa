@@ -4,8 +4,8 @@ feature 'update question', 'to correct info I want to update question' do
 
 let(:user) {create(:user)}
 let(:user2) {create(:user)}
-let(:question) {create(:question, user: user)}
-let(:question2) {create(:question, user: user2)}
+let!(:question) {create(:question, user: user)}
+let!(:question2) {create(:question, user: user2)}
 
   scenario 'owner updates question', js: true do
     sign_in(user)
@@ -23,6 +23,7 @@ let(:question2) {create(:question, user: user2)}
     sign_in(user)
 
     visit question_path(question2)
+save_and_open_page
     expect(page).to_not have_content("E.Q.")
   end
 

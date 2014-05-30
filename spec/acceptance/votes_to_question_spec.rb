@@ -10,7 +10,7 @@ feature 'Voting', 'ability to change question votes' do
     sign_in(user2)
     visit root_path
     within "#question-#{question.id}" do
-      click_on star_for
+      click_on "#{vote_path_for(object)}&up_down=1"
       within "#question-#{question.id}" do
         expect(page).to have_content  vote_add
       end
@@ -21,7 +21,7 @@ feature 'Voting', 'ability to change question votes' do
     sign_in(user2)
     visit root_path
     within within "#question-#{question.id}" do
-      click_on 'ПРОТИВ'
+      click_on "#{vote_path_for(object)}&up_down=-1"
       within within "#question-#{question.id}" do
         expect(page).to have_content  vote_substract
       end
@@ -32,7 +32,7 @@ feature 'Voting', 'ability to change question votes' do
     sign_in(user)
     visit root_path
     within "#question-#{question.id}" do
-      click_on star_for
+      click_on 
       within "#question-#{question.id}" do
         expect(page).to have_content  vote_add
       end
@@ -43,7 +43,7 @@ feature 'Voting', 'ability to change question votes' do
     sign_in(user)
     visit root_path
     within "#question-#{question.id}" do
-      click_on 'ПРОТИВ'
+      click_on 
       within "#question-#{question.id}" do
         expect(page).to have_content  vote_substract
       end
@@ -53,7 +53,7 @@ feature 'Voting', 'ability to change question votes' do
   scenario 'Non-auth user tries to up vote' do
     visit root_path
     within "#question-#{question.id}" do
-      click_on star_for
+      click_on 
     end
     expect(page).to have_content %q(You need to sign in
                                     or sign up before continuing.)
@@ -62,7 +62,7 @@ feature 'Voting', 'ability to change question votes' do
   scenario 'Non-auth user tries to down vote' do
     visit root_path
     within "#question-#{question.id}" do
-      click_on 'ПРОТИВ'
+      click_on 
     end
     expect(page).to have_content %q(You need to sign in
                                     or sign up before continuing.)

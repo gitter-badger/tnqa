@@ -14,6 +14,7 @@
         = nested_form_for [@question, answer], remote: true, html: { id: "edit-answer-#{answer.id}"} do |f|
           p
           .form-group
+            .answer_errors
             small= f.label :content, "внесите изменения"
             small= f.text_area :content, class: "form-control input-sm", placeholder: "ваши изменения"
             small= f.submit 'сохранить', class: "btn btn-success btn-xs"
