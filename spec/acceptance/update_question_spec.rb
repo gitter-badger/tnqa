@@ -23,7 +23,6 @@ let!(:question2) {create(:question, user: user2)}
     sign_in(user)
 
     visit question_path(question2)
-save_and_open_page
     expect(page).to_not have_content("E.Q.")
   end
 

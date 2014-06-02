@@ -1,0 +1,10 @@
+h4 Список пользователей
+- @users.each do |user|
+  hr
+    =user.name
+  div
+    =link_to "#{user.email}", user
+
+.raw
+  .col-md-12
+    = paginate @users
