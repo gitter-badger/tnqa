@@ -16,8 +16,9 @@ feature 'add files to question', %q{
   scenario 'auth user adds file to new question', js: true do
     fill_in 'заголовок вопроса', with: 'question title'
     fill_in 'текст вопроса', with: 'question content'
+    click_on 'добавить файл'
     attach_file 'File', "#{Rails.root}/spec/spec_helper.rb"
-    click_on 'Создать вопрос'
+    click_on 'Опубликовать вопрос'
 
     expect(page).to have_link 'spec_helper.rb', href: '/uploads/attachment/file/1/spec_helper.rb'
 

@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe QuestionsController do
-  let!(:question) { create(:question) }
+  let(:question) { create(:question, user: user) }
   let(:user) { create(:user) }
   let(:invalid_question) { create(:invalid_question) }
 
@@ -44,9 +44,6 @@ describe QuestionsController do
       expect(assigns(:question)).to be_a_new(Question)
     end
 
-    it 'builds new attachments for question' do
-      expect(assigns(:question).attachments.first).to be_a_new(Attachment)
-    end
 
     it 'renders new view' do
       expect(response).to render_template :new
@@ -99,17 +96,12 @@ describe QuestionsController do
     context 'valid attributes' do
 
       it 'changes question attributes' do
-        patch :update, id: question, question: { title: 'new title', content: 'new content'}, format: :js
+        patch :update, id: question.id, question: { title: 'new title', content: 'new content'}, format: :js
         question.reload
         expect(question.title).to eq 'new title'
         expect(question.content).to eq('new content')
       end
-
-      it 'redirects to the updated question' do
-        patch :update, id: question, question: attributes_for(:question), format: :js
-        expect(response).to redirect_to question
-      end
-     end
+    end
 
     context 'invalid attributes' do
       before {patch :update, id: question, question: { title: 'new title', content: nil}, format: :js }
@@ -119,12 +111,8 @@ describe QuestionsController do
         expect(question.title).to eq('notblanc title')
         expect(question.content).to eq "notblanc content"
       end
-
-      it "re-renders edit view" do
-        expect(response).to render_template :edit
-      end
-     end
-   end
+    end
+  end
 
   describe 'DELETE #destroy' do
     before { sign_in user; question }

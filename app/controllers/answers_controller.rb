@@ -11,13 +11,14 @@ class AnswersController < ApplicationController
 
   def  update
     @answer = Answer.find(params[:id])
-    question = @answer.question
+    @question = @answer.question
     if @answer = current_user.answers.where(id: params[:id]).first
       @answer.update(answer_params)
-      flash[:notice] = 'Ваш ответ изменен.'
-      redirect_to question_path question
+      flash[:notice] = 'Ваш ответ был изменен'
+      redirect_to question_path @question
+    else
+      redirect_to root_path, notice: "You are not allowed to update this answer"
     end
-    	redirect_to root_path, notice: "You are not allowed to update this answer"
   end
 
   def destroy
@@ -25,10 +26,10 @@ class AnswersController < ApplicationController
     question = @answer.question
     if @answer = current_user.answers.where(id: params[:id]).first
       @answer.destroy
-      flash[:notice] = 'Ваш ответ удален.'
+      flash[:notice] = 'Ваш ответ был удален'
       redirect_to question_path question
     else
-    	redirect_to root_path, notice: "You are not allowed to delete this answer"
+      redirect_to root_path, notice: "You are not allowed to delete this answer"
     end
   end
 
