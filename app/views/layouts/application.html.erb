@@ -11,7 +11,7 @@
       <div class="header">
         <ul class="nav nav-pills pull-right">
           <% if user_signed_in? %>
-            <li class="active"><%= "приветствуем, #{current_user.name}" %></li>
+            <li class="active"><%= link_to("приветствуем, #{current_user.name}", current_user) %></li>
             <li><%= link_to('Выйти', destroy_user_session_path, method: :delete) %></li>
           <% else %>
             <li><%= link_to('Войти', new_user_session_path) %></li>

@@ -7,7 +7,7 @@ ownerattachesfiles
 } do 
 
 let(:user) { create(:user)}
-let!(:question) { create(:question)}
+let(:question) { create(:question)}
 
 background do
 	sign_in(user)
