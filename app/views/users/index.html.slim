@@ -1,6 +1,7 @@
 h4 Список пользователей
 - @users.each do |user|
   hr
+    =image_tag avatar_url(user)
     =user.name
   div
     =link_to "#{user.email}", user
