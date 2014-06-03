@@ -12,7 +12,7 @@ describe VotesController do
   describe "vote for object" do
     it "add user vote" do
       expect {
-        get 'create', type: 'question', id: question.id
+        xhr 'create', type: 'question', id: question.id, up_down: 1
       }.to change { user.votes.count }.from(0).to(1)
     end
   end
@@ -21,7 +21,7 @@ describe VotesController do
     it "remove user vote" do
       user.vote!(question)
       expect {
-        get 'destroy', type: 'question', id: question.id
+        xhr 'destroy', type: 'question', id: question.id
       }.to change { user.votes.count }.from(1).to(0)
     end
   end

@@ -3,6 +3,7 @@ class VotesController < ApplicationController
 
   def create
     current_user.vote!(object, params[:up_down])
+
   end
 
   def destroy

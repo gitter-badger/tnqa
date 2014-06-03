@@ -35,20 +35,22 @@ class QuestionsController < ApplicationController
   end
 
   def update
-    question.update(question_params)
-    # if question.update(question_params)
-    #   redirect_to @question, notice: "Your question has been updated"
-    # else
-    #   render :edit
-    # end
+    if @question = current_user.questions.where(id: params[:id]).first
+    question.update(question_params) 
+    flash[:notice] = "Your question has been updated"
+  else
+    redirect_to root_path, notice: "You are not allowed to update this question"
+  end
   end
 
   def destroy
     question
-    #if @answer.user == current_user
+    if @question = current_user.questions.where(id: params[:id]).first
     question.destroy
     redirect_to questions_path, notice: "Your question has been deleted"
-    #end
+  else
+    redirect_to root_path, notice: "You are not allowed to delete this question"
+  end
   end
 
 

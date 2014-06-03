@@ -10,9 +10,7 @@ feature 'delete comment for question', 'deleting comments', js: true do
   scenario 'non-auth user try to destroy comment' do
     visit question_path(question)
     
-    within "#comment_#{comment.id}" do
       expect(page).to_not have_link "- коммент"
-    end
   end
 
   scenario 'other user try to destroy comment', js: true do

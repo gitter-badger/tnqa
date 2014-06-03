@@ -10,19 +10,26 @@ class AnswersController < ApplicationController
   end
 
   def  update
+    @answer = Answer.find(params[:id])
+    question = @answer.question
     if @answer = current_user.answers.where(id: params[:id]).first
       @answer.update(answer_params)
+      flash[:notice] = 'Ваш ответ изменен.'
+      redirect_to question_path question
     end
-    @question = @answer.question
+    	redirect_to root_path, notice: "You are not allowed to update this answer"
   end
 
   def destroy
     @answer = Answer.find(params[:id])
+    question = @answer.question
     if @answer = current_user.answers.where(id: params[:id]).first
       @answer.destroy
+      flash[:notice] = 'Ваш ответ удален.'
+      redirect_to question_path question
+    else
+    	redirect_to root_path, notice: "You are not allowed to delete this answer"
     end
-    @question = @answer.question
-    redirect_to questions_path, notice: "Your answer has been deleted"
   end
 
   private

@@ -9,7 +9,7 @@
     small= raw @question.tag_list.map { |t| link_to t, tag_path(t), class: "label label-primary" }.join(' ')
 
 
-  - if current_user.questions.where(id: @question.id)
+  - if @question.user == current_user
         small= link_to 'E.Q. / ', '', class: 'edit-question-link', data: { question_id: @question.id }
         small= link_to ' D.Q.', question_path(@question), method: :delete, data: {confirm: 'Are you sure?'}
         
@@ -22,23 +22,25 @@
 
   p
     .comments
+      .js-comment-errors
       = render partial: 'comments/list', locals: {commentable: @question}
 
   .answers style="font-size: 90%;"
     = render 'answers'
 
-  = nested_form_for [@question, @answer], remote: true do |f|
-    p 
-    .form-group
-      .answer_errors
-      = f.text_area :content, class: "form-control input-sm", placeholder: "ваш ответ"
-      small= f.link_to_add "добавить файл", :attachments
-    p
+  - if user_signed_in?
+    = nested_form_for [@question, @answer], remote: true do |f|
+      p 
       .form-group
-        = f.fields_for :attachments do |a|
-          = a.label :file
-          = a.file_field :file
-          small= a.link_to_remove "удалить файл"
-    p
-    .actions
-     = f.submit 'Добавьте ответ', class: "btn btn-success btn-xs"
+        .answer_errors
+        = f.text_area :content, class: "form-control input-sm", placeholder: "ваш ответ"
+        small= f.link_to_add "добавить файл", :attachments
+      p
+        .form-group
+          = f.fields_for :attachments do |a|
+            = a.label :file
+            = a.file_field :file
+            small= a.link_to_remove "удалить файл"
+      p
+      .actions
+       = f.submit 'Добавьте ответ', class: "btn btn-success btn-xs"

@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe QuestionsController do
-  let(:question) { create(:question) }
+  let!(:question) { create(:question) }
   let(:user) { create(:user) }
   let(:invalid_question) { create(:invalid_question) }
 
@@ -97,10 +97,6 @@ describe QuestionsController do
     before { sign_in user }
 
     context 'valid attributes' do
-      it "assigns the requested question to @question" do
-        patch :update, id: question, question: attributes_for(:question), format: :js
-        expect(assigns(:question)).to eq question
-      end
 
       it 'changes question attributes' do
         patch :update, id: question, question: { title: 'new title', content: 'new content'}, format: :js
@@ -109,10 +105,10 @@ describe QuestionsController do
         expect(question.content).to eq('new content')
       end
 
-    #   it 'redirects to the updated question' do
-    #     patch :update, id: question, question: attributes_for(:question), format: :js
-    #     expect(response).to redirect_to question
-    #   end
+      it 'redirects to the updated question' do
+        patch :update, id: question, question: attributes_for(:question), format: :js
+        expect(response).to redirect_to question
+      end
      end
 
     context 'invalid attributes' do
@@ -124,9 +120,9 @@ describe QuestionsController do
         expect(question.content).to eq "notblanc content"
       end
 
-  #     it "re-renders edit view" do
-  #       expect(response).to render_template :edit
-  #     end
+      it "re-renders edit view" do
+        expect(response).to render_template :edit
+      end
      end
    end
 
