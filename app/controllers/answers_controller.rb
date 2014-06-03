@@ -10,18 +10,17 @@ class AnswersController < ApplicationController
   end
 
   def  update
-    @answer = Answer.find(params[:id])
-    #if @answer.user == current_user
-    @answer.update(answer_params)
-    #end
+    if @answer = current_user.answers.where(id: params[:id]).first
+      @answer.update(answer_params)
+    end
     @question = @answer.question
   end
 
   def destroy
     @answer = Answer.find(params[:id])
-    #if @answer.user == current_user
-    @answer.destroy
-    #end
+    if @answer = current_user.answers.where(id: params[:id]).first
+      @answer.destroy
+    end
     @question = @answer.question
     redirect_to questions_path, notice: "Your answer has been deleted"
   end
