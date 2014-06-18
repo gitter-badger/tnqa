@@ -45,3 +45,5 @@
       p
       .actions
        = f.submit 'Добавьте ответ', class: "btn btn-success btn-xs"
+
+= subscribe_to "/questions/#{@question.id}/answers"
