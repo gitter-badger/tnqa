@@ -36,6 +36,8 @@ gem 'remotipart'
 gem "nested_form"
 gem 'acts-as-taggable-on'
 gem 'gravtastic'
+gem 'private_pub'
+gem 'thin'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
