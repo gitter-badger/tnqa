@@ -1,10 +1,13 @@
 h4 Список пользователей
 - @users.each do |user|
-  hr
-    =image_tag avatar_url(user)
-    =user.name
-  div
-    =link_to "#{user.email}", user
+ .col-md-2
+   =image_tag user.gravatar_url
+ .col-md-2
+	 =user.name
+ .col-md-8
+   hr
+		 p
+		   =link_to "#{user.email}", user
 
 .raw
   .col-md-12

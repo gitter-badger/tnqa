@@ -1,6 +1,7 @@
 - @question.answers.each do |answer|
   - if answer.persisted?
     hr
+    p=image_tag answer.user.gravatar_url(:size => 25)
     .answer id="answer_#{answer.id}" style="color: #696969;"
       p= answer.content
       ul

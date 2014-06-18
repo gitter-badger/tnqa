@@ -5,3 +5,4 @@ FactoryGirl.define do
     file "MyString"
   end
 end
+ 
