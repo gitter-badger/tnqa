@@ -40,6 +40,7 @@ gem 'private_pub'
 gem 'thin'
 gem 'omniauth'
 gem 'omniauth-facebook'
+gem 'omniauth-twitter'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
