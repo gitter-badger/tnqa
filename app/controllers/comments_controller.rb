@@ -2,6 +2,8 @@ class CommentsController < ApplicationController
   helper_method :object
   before_action :authenticate_user!, only: [:create, :edit, :update, :destroy]
 
+  load_and_authorize_resource
+
   def create
     @comment = object.comments.build(comment_params)
     @comment.user = current_user

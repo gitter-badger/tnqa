@@ -16,7 +16,7 @@ class User < ActiveRecord::Base
 
   paginates_per 5
 
-  has_many :authorizations
+  has_many :authorizations, dependent: :destroy
   has_many :questions
   has_many :answers
   has_many :votes
@@ -38,10 +38,10 @@ class User < ActiveRecord::Base
   end
 
   def self.find_for_oauth(auth)
-    authorization = Authorization.where(provider: auth.provider, uid: auth.uid.to_s).first
-    return authorization.user if authorization
+    @authorization = Authorization.where(provider: auth.provider, uid: auth.uid.to_s).first
+    return @authorization.user if @authorization
 
-    email = auth.info[:email] || "#{auth.uid}@sample.com"
+    email = auth.info[:email] || "#{auth.uid}@fromtwitter.com"
     user = User.where(email: email).first
     if user
       user.authorizations.create(provider:auth.provider, uid: auth.uid)
