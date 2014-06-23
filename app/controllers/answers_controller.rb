@@ -6,11 +6,13 @@ class AnswersController < ApplicationController
     @question = Question.find(params[:question_id])
     @answer = @question.answers.create(answer_params)  do |answer|
       answer.user = current_user
+      authorize answer
     end
   end
 
   def  update
     @answer = Answer.find(params[:id])
+    authorize @answer
     @question = @answer.question
     if @answer = current_user.answers.where(id: params[:id]).first
       @answer.update(answer_params)
@@ -23,6 +25,7 @@ class AnswersController < ApplicationController
 
   def destroy
     @answer = Answer.find(params[:id])
+    authorize @answer
     question = @answer.question
     if @answer = current_user.answers.where(id: params[:id]).first
       @answer.destroy

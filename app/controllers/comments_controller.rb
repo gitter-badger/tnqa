@@ -5,11 +5,13 @@ class CommentsController < ApplicationController
   def create
     @comment = object.comments.build(comment_params)
     @comment.user = current_user
+    authorize @comment
     @comment.save
   end
 
   def update
     @comment = Comment.find(params[:id])
+    authorize @comment
     #if @comment.user == current_user
     @comment.update(comment_params)
     #end
@@ -17,6 +19,7 @@ class CommentsController < ApplicationController
 
   def destroy
     @comment = Comment.find(params[:id])
+    authorize @comment
     #if @comment.user == current_user
     @comment.destroy
     #end

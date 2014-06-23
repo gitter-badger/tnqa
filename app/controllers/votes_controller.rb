@@ -3,7 +3,6 @@ class VotesController < ApplicationController
 
   def create
     current_user.vote!(object, params[:up_down])
-
   end
 
   def destroy
@@ -11,6 +10,10 @@ class VotesController < ApplicationController
   end
 
   private
+
+  def without_pundit?
+    true
+  end
 
   def object
     return unless %w[question answer].include? params[:type]
