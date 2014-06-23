@@ -2,8 +2,6 @@ class QuestionsController < ApplicationController
 
   before_action :authenticate_user!, only: [:create, :new, :update, :destroy]
 
-  load_and_authorize_resource
-
   def index
     if params[:tag]
       @questions = Question.tagged_with(params[:tag]).page(params[:page])
