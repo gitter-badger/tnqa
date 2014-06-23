@@ -5,9 +5,9 @@ class ApplicationController < ActionController::Base
   after_action :verify_authorized, :except => :index
   protect_from_forgery with: :exception
  
-  rescue_from CanCan::AccessDenied do
-  	render text: 'Доступ запрещен'
-  end
+  # rescue_from CanCan::AccessDenied do
+  # 	render text: 'Доступ запрещен'
+  # end
 
   def after_sign_up_path_for(questions)
     questions_path(questions)

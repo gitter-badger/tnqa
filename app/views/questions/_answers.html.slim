@@ -7,7 +7,7 @@
       ul
         - answer.attachments.each do |a|
           li= link_to a.file.file.identifier, a.file.url
-      - if answer.user == current_user
+      - if policy(answer).update?
         small= link_to 'E.A. / ', '', class: 'edit-answer-link', data: { answer_id: answer.id }
         small= link_to ' D.A.', question_answer_path(answer.question, answer), method: :delete, data: {confirm: 'Вы хотите удалить ответ?'}
 
