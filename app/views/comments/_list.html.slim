@@ -1,6 +1,8 @@
 - if user_signed_in?
   small= link_to( '+ коммент', '#', {onclick: "$('#com_#{dom_id(commentable)}').fadeIn(); $(this).fadeOut();", id: "link_#{dom_id(commentable)}"})
+
   .new_comment_form style="display: none;" id="com_#{dom_id(commentable)}"
+    .js-comment-errors     
     = render partial: 'comments/form', locals: {commentable: commentable, comment: commentable.comments.build}
     = link_to( 'свернуть форму', '#', {onclick: "$('#com_#{dom_id(commentable)}').fadeOut(); $('#link_#{dom_id(commentable)}').fadeIn();"})
 
@@ -9,7 +11,7 @@
     div id="comment_#{comment.id}" style="color: #8B7D6B; font-size: 90%"
       br
       = comment.content
-      = link_to image_tag(comment.user.gravatar_url(:size => 20)), comment.user
+      = avatar(comment.user, size: 30)
       - if user_signed_in? and comment.user == current_user
         = link_to '- коммент', comment_path(comment), remote: true, method: :delete, data: {confirm: 'Удалить комментарий?'}
 

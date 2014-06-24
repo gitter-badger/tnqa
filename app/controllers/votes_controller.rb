@@ -2,7 +2,7 @@ class VotesController < ApplicationController
   helper_method :object
 
   def create
-    current_user.vote!(object, params[:up_down])
+    current_user.vote!(object)
   end
 
   def destroy

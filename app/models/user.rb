@@ -22,17 +22,18 @@ class User < ActiveRecord::Base
   has_many :votes
   has_many :reps
 
-  def vote!(object, up_down)
+  def vote!(object)
     vote = votes.where(votable: object).first_or_initialize
-    vote.score = up_down.to_i
+    vote.score += 1
     vote.save!
-    object.user.reps.create!(action_value: 5*vote.score, action_name: :xxx)
+    object.user.change_reputation!(:vote_question)
   end
 
   def unvote!(object)
-    if vote = votes.where(votable: object).first
-      vote.destroy!
-    end
+    vote = votes.where(votable: object).first_or_initialize
+    vote.score -= 1
+    vote.save!
+    object.user.change_reputation!(:unvote_question)
   end
 
   def voted?(object)
@@ -57,5 +58,9 @@ class User < ActiveRecord::Base
 
     def reputation
       Rep.where(user: self).sum(:action_value)
+    end
+
+    def change_reputation!(action_name)
+     reps.create!(action_value: Rep::REPUTATION[action_name], action_name: action_name)
     end
   end

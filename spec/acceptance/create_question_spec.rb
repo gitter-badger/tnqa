@@ -4,9 +4,8 @@ feature 'create question', 'to qet answer being auth. I want to ask' do
 
 let!(:user) {create(:user)}
 
-  scenario 'auth user create q' do
+  scenario 'auth user create q', js: true do
     sign_in(user)
-
     visit root_path
     click_on 'ЗАДАТЬ ВОПРОС'
     fill_in 'Заголовок', with: 'my title'
@@ -14,6 +13,7 @@ let!(:user) {create(:user)}
     fill_in 'Тэги', with: 'my'
     click_on 'Опубликовать вопрос'
 
+    sleep 2
     expect(page).to have_content 'Your question successfully created.'
   end
 

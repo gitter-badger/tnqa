@@ -4,12 +4,12 @@
     .col-md-1
       - if user_signed_in?
         h3
-          = star_for(answer)
+          = vote_for(answer)
           h3
     .col-md-1
       h3.value= answer.votes.sum(:score)
     .col-md-10
-      = link_to image_tag(answer.user.gravatar_url(:size => 25)), answer.user
+      = avatar(answer.user)
 
 
       p= answer.content
@@ -20,7 +20,7 @@
         small= link_to 'E.A. / ', '', class: 'edit-answer-link', data: { answer_id: answer.id }
         small= link_to ' D.A.', question_answer_path(answer.question, answer), method: :delete, data: {confirm: 'Вы хотите удалить ответ?'}
 
-        = nested_form_for [@question, answer], remote: true, html: { id: "edit-answer-#{answer.id}"} do |f|
+        = nested_form_for answer, remote: true, html: { id: "edit-answer-#{answer.id}"} do |f|
           p
           .form-group
             .answer_errors

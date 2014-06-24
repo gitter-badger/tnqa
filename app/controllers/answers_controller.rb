@@ -16,10 +16,6 @@ class AnswersController < ApplicationController
     @question = @answer.question
     if @answer = current_user.answers.where(id: params[:id]).first
       @answer.update(answer_params)
-      flash[:notice] = 'Ваш ответ был изменен'
-      redirect_to question_path @question
-    else
-      redirect_to root_path, notice: "You are not allowed to update this answer"
     end
   end
 
@@ -29,10 +25,6 @@ class AnswersController < ApplicationController
     question = @answer.question
     if @answer = current_user.answers.where(id: params[:id]).first
       @answer.destroy
-      flash[:notice] = 'Ваш ответ был удален'
-      redirect_to question_path question
-    else
-      redirect_to root_path, notice: "You are not allowed to delete this answer"
     end
   end
 
@@ -41,6 +33,4 @@ class AnswersController < ApplicationController
   def answer_params
     params.require(:answer).permit(:content, attachments_attributes: [:file, :_destroy])
   end
-
-
 end

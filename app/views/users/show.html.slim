@@ -3,6 +3,7 @@ h4 Данные пользователя:
 p=image_tag @user.gravatar_url
 p Email: #{@user.email}
 p Name: #{@user.name}
+p Reputation: #{@user.reputation}
 
 = link_to 'редактировать/удалить ваш эккаунт', edit_user_registration_path if current_user == @user
 hr

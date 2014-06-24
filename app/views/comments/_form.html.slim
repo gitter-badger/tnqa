@@ -1,5 +1,4 @@
 = form_for [commentable, comment], remote: true, html: {id: "comments_" + dom_id(commentable)} do |f|
-
   p
   .form-group
    = f.text_area :content, class: "form-control input-sm", placeholder: "ваш комментарий"

@@ -1,5 +1,5 @@
 .question id="question_#{@question.id}" style="color: #556B2F; font-size: 120%;"
-  p= link_to image_tag(@question.user.gravatar_url), @question.user
+  p= avatar(@question.user)
   h4= @question.title
   p.content= @question.content
   p
@@ -23,7 +23,6 @@
 
   p
     .comments
-      .js-comment-errors
       = render partial: 'comments/list', locals: {commentable: @question}
 
   .answers style="font-size: 90%;"

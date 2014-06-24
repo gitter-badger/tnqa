@@ -86,12 +86,12 @@ describe User do
 
       it 'creates new rep and returns 5' do
         question = create(:question)
-        expect { user.vote!(question, 1) }.to change{ question.user.reputation }.by(5)  
+        expect { user.vote!(question) }.to change{ question.user.reputation }.by(5)  
       end
 
-      it 'creates new rep and returns -5' do
+      it 'creates new rep and returns -2' do
         question = create(:question)
-        expect { user.vote!(question, -1) }.to change{ question.user.reputation }.by(-5)  
+        expect { user.unvote!(question) }.to change{ question.user.reputation }.by(-2)  
       end
     end
   end

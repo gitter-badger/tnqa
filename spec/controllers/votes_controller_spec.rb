@@ -10,19 +10,18 @@ describe VotesController do
   end
 
   describe "vote for object" do
-    it "add user vote" do
+    it "plus user vote" do
       expect {
-        xhr 'create', type: 'question', id: question.id, up_down: 1
+        xhr :post, :create, type: 'question', id: question.id
       }.to change { user.votes.count }.from(0).to(1)
     end
   end
 
   describe "unvote for object" do
-    it "remove user vote" do
-      user.vote!(question)
+    it "minus user vote" do
       expect {
-        xhr 'destroy', type: 'question', id: question.id
-      }.to change { user.votes.count }.from(1).to(0)
+        xhr :post, :destroy, type: 'question', id: question.id
+      }.to change { user.votes.count }.from(0).to(1)
     end
   end
 end
