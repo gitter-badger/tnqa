@@ -1,26 +1,2 @@
-- @question.answers.each do |answer|
-  - if answer.persisted?
-    hr
-    p=image_tag answer.user.gravatar_url(:size => 25)
-    .answer id="answer_#{answer.id}" style="color: #696969;"
-      p= answer.content
-      ul
-        - answer.attachments.each do |a|
-          li= link_to a.file.file.identifier, a.file.url
-      - if policy(answer).update?
-        small= link_to 'E.A. / ', '', class: 'edit-answer-link', data: { answer_id: answer.id }
-        small= link_to ' D.A.', question_answer_path(answer.question, answer), method: :delete, data: {confirm: 'Вы хотите удалить ответ?'}
-
-        
-        = nested_form_for [@question, answer], remote: true, html: { id: "edit-answer-#{answer.id}"} do |f|
-          p
-          .form-group
-            .answer_errors
-            small= f.label :content, "внесите изменения"
-            small= f.text_area :content, class: "form-control input-sm", placeholder: "ваши изменения"
-            small= f.submit 'сохранить', class: "btn btn-success btn-xs"
-
-      p
-        .comments style="font-size: 80%;"
-          .js-comment-errors
-          = render partial: 'comments/list', locals: {commentable: answer}
+- @question.answers.each do |object|
+  = render partial: 'questions/answer', locals: { answer: object }
