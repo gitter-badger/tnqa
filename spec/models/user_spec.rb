@@ -72,4 +72,16 @@ describe User do
         end
       end
     end
+    context 'reputation' do
+      let(:user) { create(:user) }
+      it 'returns 0 by default' do
+        expect(user.reputation).to eq 0
+      end
+
+      it 'returns sum of all action_values' do
+        create_list(:rep, 2, user: user, action_value: 5, action_name: :vote)
+        expect(user.reputation).to eq 10
+      end
+
+    end
   end

@@ -52,4 +52,8 @@ class User < ActiveRecord::Base
     end
       user
     end
+
+    def reputation
+      Rep.where(user: self).sum(:action_value)
+    end
   end
