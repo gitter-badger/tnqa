@@ -9,7 +9,7 @@
     .col-md-1
       h3.value= answer.votes.sum(:score)
     .col-md-10
-      =image_tag answer.user.gravatar_url(:size => 25)
+      = link_to image_tag(answer.user.gravatar_url(:size => 25)), answer.user
 
 
       p= answer.content

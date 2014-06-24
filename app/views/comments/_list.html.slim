@@ -9,7 +9,7 @@
     div id="comment_#{comment.id}" style="color: #8B7D6B; font-size: 90%"
       br
       = comment.content
-      = image_tag comment.user.gravatar_url(:size => 15)
+      = link_to image_tag(comment.user.gravatar_url(:size => 20)), comment.user
       - if user_signed_in? and comment.user == current_user
         = link_to '- коммент', comment_path(comment), remote: true, method: :delete, data: {confirm: 'Удалить комментарий?'}
 

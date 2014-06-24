@@ -74,6 +74,7 @@ describe User do
     end
     context 'reputation' do
       let(:user) { create(:user) }
+      
       it 'returns 0 by default' do
         expect(user.reputation).to eq 0
       end
@@ -83,5 +84,14 @@ describe User do
         expect(user.reputation).to eq 10
       end
 
+      it 'creates new rep and returns 5' do
+        question = create(:question)
+        expect { user.vote!(question, 1) }.to change{ question.user.reputation }.by(5)  
+      end
+
+      it 'creates new rep and returns -5' do
+        question = create(:question)
+        expect { user.vote!(question, -1) }.to change{ question.user.reputation }.by(-5)  
+      end
     end
   end

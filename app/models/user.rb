@@ -20,11 +20,13 @@ class User < ActiveRecord::Base
   has_many :questions
   has_many :answers
   has_many :votes
+  has_many :reps
 
   def vote!(object, up_down)
     vote = votes.where(votable: object).first_or_initialize
     vote.score = up_down.to_i
     vote.save!
+    object.user.reps.create!(action_value: 5*vote.score, action_name: :xxx)
   end
 
   def unvote!(object)

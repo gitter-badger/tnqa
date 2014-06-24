@@ -10,7 +10,7 @@
   <div class='col-md-10'>
     <hr>
     <p> 
-     <%= image_tag question.user.gravatar_url %>
+     <%= link_to image_tag(question.user.gravatar_url), question.user %>
     </p> 
     <h4><%= link_to question.title, question %></h4>
     <p class="text-muted"><%= truncate(question.content, length: 185) { link_to "Continue", question } %></p>

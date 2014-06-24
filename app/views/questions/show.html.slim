@@ -1,5 +1,5 @@
 .question id="question_#{@question.id}" style="color: #556B2F; font-size: 120%;"
-  p=image_tag @question.user.gravatar_url
+  p= link_to image_tag(@question.user.gravatar_url), @question.user
   h4= @question.title
   p.content= @question.content
   p
