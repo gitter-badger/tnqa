@@ -13,10 +13,6 @@ class VotesController < ApplicationController
 
   private
 
-  # def without_pundit?
-  #   true
-  # end
-
   def object
     return unless %w[question answer].include? params[:type]
     params[:type].classify.constantize.find(params[:id])

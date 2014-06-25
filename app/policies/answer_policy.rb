@@ -1,11 +1,11 @@
 class AnswerPolicy < ApplicationPolicy
 
   def create?
-    user.present?
+    user.present? && user.reputation >= 50
   end
 
   def update?
-    record.user == user
+    record.user == user || user.reputation >= 2000
   end
 
   def destroy?

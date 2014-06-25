@@ -1,7 +1,7 @@
 class CommentPolicy < ApplicationPolicy
 
   def create?
-    user.present?
+    user.present? && user.reputation >= 50
   end
 
   def update?

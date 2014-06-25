@@ -1,8 +1,8 @@
 require "spec_helper"
 
-describe AnswerPolicy do
+describe CommentPolicy do
   let(:user) { create(:user) }
-  let(:record) { create :answer, user: user }
+  let(:record) { create :comment, user: user }
 
   context '#create?' do
     it 'is false if user nil' do
@@ -15,28 +15,22 @@ describe AnswerPolicy do
     it 'is false if user exists and rep < 50' do
       user.reps.create action_value: 5
       expect(described_class.new(user, record).create?).to eq(false)
-    end    
+    end
   end
 
   context '#update?' do
-    it 'is false if user non-author' do 
+    it 'is false if user non-author' do
       user = create(:user)
       expect(described_class.new(user, record).update?).to eq(false)
     end
-
-    it 'is true if user non-author but his rep >= 2000' do 
-      user = create(:user)
-      user.reps.create action_value: 2000
-      expect(described_class.new(user, record).update?).to eq(true)
-    end
-
+    
     it 'is true if user is author' do
       expect(described_class.new(user, record).update?).to eq(true)
     end
   end
 
   context '#destroy?' do
-    it 'is false if user non-author' do 
+    it 'is false if user non-author' do
       user = create(:user)
       expect(described_class.new(user, record).destroy?).to eq(false)
     end
