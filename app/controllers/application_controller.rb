@@ -22,8 +22,12 @@ class ApplicationController < ActionController::Base
   private
 
   def user_not_authorized
-    flash[:error] = "You are not authorized to perform this action."
-    redirect_to(request.referrer || root_path)
+    respond_to do |format|
+      format.html {
+        flash[:error] = "You are not authorized to perform this action."
+        redirect_to(request.referrer || root_path)
+      }
+      format.js {render text: "alert('У вас недостаточно репутационных баллов');" }
+    end
   end
-
 end
