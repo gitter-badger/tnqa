@@ -59,7 +59,7 @@ class User < ActiveRecord::Base
     end
 
     def reputation
-      Rep.where(user: self).sum(:action_value)
+      reps.sum(:action_value)
     end
 
     def change_reputation!(action_name)

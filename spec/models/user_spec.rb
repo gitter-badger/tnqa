@@ -96,7 +96,7 @@ describe User do
 
       it 'creates new rep and returns 10' do
         answer = create(:answer)
-        expect { user.vote!(answer) }.to change{ answer.user.reputation }.by(10)  
+        expect { user.vote!(answer) }.to change{ answer.user.reputation }.by(10  )  
       end
 
       it 'creates new rep and returns -2' do
