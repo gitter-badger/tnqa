@@ -93,5 +93,15 @@ describe User do
         question = create(:question)
         expect { user.unvote!(question) }.to change{ question.user.reputation }.by(-2)  
       end
+
+      it 'creates new rep and returns 10' do
+        answer = create(:answer)
+        expect { user.vote!(answer) }.to change{ answer.user.reputation }.by(10)  
+      end
+
+      it 'creates new rep and returns -2' do
+        answer = create(:answer)
+        expect { user.unvote!(answer) }.to change{ answer.user.reputation }.by(-2)  
+      end
     end
   end

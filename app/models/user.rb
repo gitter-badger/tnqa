@@ -26,14 +26,16 @@ class User < ActiveRecord::Base
     vote = votes.where(votable: object).first_or_initialize
     vote.score += 1
     vote.save!
-    object.user.change_reputation!(:vote_question)
+    action_name = "vote_#{object.class}".downcase.to_sym
+    object.user.change_reputation!(action_name)
   end
 
   def unvote!(object)
     vote = votes.where(votable: object).first_or_initialize
     vote.score -= 1
     vote.save!
-    object.user.change_reputation!(:unvote_question)
+    action_name = "unvote_#{object.class}".downcase.to_sym
+    object.user.change_reputation!(action_name)
   end
 
   def voted?(object)
