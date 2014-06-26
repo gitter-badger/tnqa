@@ -4,7 +4,7 @@
   <li class="<%= current_page?('/aaaaaaaa') ? 'active' : '' %>"><%= link_to 'Recent', root_path %></li>
   <li class="<%= current_page?('/aaaaaaaa') ? 'active' : '' %>"><%= link_to 'Unanswered', root_path %></li>
   <li class="<%= current_page?(users_path) ? 'active' : '' %>"><%= link_to 'Users', users_path %></li>
-  <li class="<%= current_page?('/aaaaaaaa') ? 'active' : '' %>"><%= link_to 'Tags', root_path %></li>
+  <li class="<%= current_page?(tags_path) ? 'active' : '' %>"><%= link_to 'Tags', tags_path %></li>
 </ul>     
 <ul class="nav nav-pills pull-right">
   <% if user_signed_in? %>

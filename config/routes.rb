@@ -18,7 +18,8 @@ Tnqa::Application.routes.draw do
   end
 
   resources :comments
-
+  resources :tags, only: [:index]
+  
   resource :votes, only: [:create, :destroy]
   resource :favorites, only: [:create, :destroy]
 
