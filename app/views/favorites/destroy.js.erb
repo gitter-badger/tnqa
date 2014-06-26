@@ -1,0 +1,9 @@
+<% if object.class == Question %>
+$('#<%= dom_id(object) %>').fadeOut();
+$('#<%= dom_id(object) %>').html("<%= j render partial: 'questions/question', locals: { question: object } %>")
+$('#<%= dom_id(object) %>').fadeIn();
+<% else %>
+$('#<%= dom_id(object) %>').fadeOut();
+$('#<%= dom_id(object) %>').html("<%= j render partial: 'questions/answer', locals: { answer: object } %>")
+$('#<%= dom_id(object) %>').fadeIn();
+<% end %>

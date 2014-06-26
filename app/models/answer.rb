@@ -6,6 +6,7 @@ class Answer < ActiveRecord::Base
   has_many :attachments, as: :attachmentable
   has_many :comments, as: :commentable
   has_many :votes, as: :votable
+  has_many :favorites, as: :favoritable
 
   accepts_nested_attributes_for :attachments, allow_destroy: true
 end
