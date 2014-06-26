@@ -3,7 +3,7 @@ require 'spec_helper'
 describe AnswersController do
   let(:question) {create(:question, user: user)}
 
-  let(:user) { create :user }
+  let(:user) { create :user, :with_reputation }
   let(:user2) { create :user }
 
   let(:answer) { create(:answer, question: question, user: user) }

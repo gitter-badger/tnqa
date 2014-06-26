@@ -1,8 +1,8 @@
 require_relative 'acceptance_helper'
 
 feature 'Voting', 'ability to change question votes' do
-  let(:user) { create(:user) }
-  let(:user2) { create(:user) }
+  let(:user) { create(:user, :with_reputation) }
+  let(:user2) { create(:user, :with_reputation) }
   let!(:question) { create(:question, user: user) }
   let(:vote) { create(:vote, votable: question, user: user2) }
 

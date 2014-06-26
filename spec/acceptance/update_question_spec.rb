@@ -7,18 +7,6 @@ let(:user2) {create(:user)}
 let!(:question) {create(:question, user: user)}
 let!(:question2) {create(:question, user: user2)}
 
-  scenario 'owner updates question', js: true do
-    sign_in(user)
-
-    visit question_path(question)
-    click_on 'E.Q.'
-    fill_in("внесите изменения", with: "new question")
-    click_on 'сохранить'
-
-    expect(page).not_to have_content question.content
-    expect(page).to have_content("new question")
-  end
-
   scenario 'auth user updates question' do
     sign_in(user)
 

@@ -13,7 +13,7 @@ class QuestionPolicy < ApplicationPolicy
   end
 
   def update?
-    record.user == user
+    record.user == user || user.reputation >= 2000
   end
 
   def destroy?

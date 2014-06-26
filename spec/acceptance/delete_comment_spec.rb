@@ -37,7 +37,7 @@ feature 'delete comment for question', 'deleting comments', js: true do
     scenario 'owner destroy his comment', js: true do
       within "#comment_#{comment.id}" do
         click_on "- коммент"
-
+        page.driver.browser.switch_to.alert.accept
         expect(current_path).to eq question_path(question)
       end
         expect(page).to_not have_selector "#comment_#{comment.id}"

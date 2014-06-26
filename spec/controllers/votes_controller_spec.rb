@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe VotesController do
-  let(:user) { create(:user) }
+  let(:user) { create(:user, :with_reputation) }
   let(:question) { create(:question) }
 
   before(:each) do

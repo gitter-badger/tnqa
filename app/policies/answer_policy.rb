@@ -9,7 +9,7 @@ class AnswerPolicy < ApplicationPolicy
   end
 
   def destroy?
-    update?
+    record.user == user
   end
 
   class Scope < Struct.new(:user, :scope)

@@ -2,7 +2,7 @@ require_relative 'acceptance_helper'
 
 feature 'User answer', 'to help friends I answer their questions' do 
 	
-	let(:user) { create(:user)}
+	let(:user) { create(:user, :with_reputation) }
 	let(:question) { create(:question)}
 
 	scenario 'auth user create answer', js: true do

@@ -10,6 +10,12 @@ FactoryGirl.define do
     email
     password "foobarrr"
     password_confirmation { |u| u.password }
+
+    trait :with_reputation do 
+      after :create do |object|
+        object.reps.create action_value: 20_000, action_name: 'xxx'
+      end
+    end
   end
 
   factory :invalid_user, class: User do
