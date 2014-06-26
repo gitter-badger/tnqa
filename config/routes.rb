@@ -4,8 +4,10 @@ Tnqa::Application.routes.draw do
   get 'tags/:tag', to: 'questions#index', as: :tag
 
   resources :questions do
-    collection do 
-     get :top, action: :index, type: :top
+    collection do
+      get :top, action: :index, type: :top
+      get :unanswered, action: :index, type: :unanswered
+      get :recent, action: :index, type: :recent     
     end
     resources :comments
     resources :answers do
@@ -19,7 +21,7 @@ Tnqa::Application.routes.draw do
 
   resources :comments
   resources :tags, only: [:index]
-  
+
   resource :votes, only: [:create, :destroy]
   resource :favorites, only: [:create, :destroy]
 

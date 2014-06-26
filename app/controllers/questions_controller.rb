@@ -10,6 +10,10 @@ class QuestionsController < ApplicationController
       @questions = Question.tagged_with(params[:tag]).page(params[:page])
     elsif params[:type] == :top
         @questions = Kaminari.paginate_array(Question.top).page(params[:page])
+    elsif params[:type] == :unanswered
+        @questions = Kaminari.paginate_array(Question.unanswered).page(params[:page])
+    elsif params[:type] == :recent
+      @questions = Question.recent.page(params[:page])
     else
       @questions = Question.all.page(params[:page])
     end

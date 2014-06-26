@@ -9,7 +9,7 @@ feature "user profile" do
   end
 
   scenario "non-auth sees user's list" do
-    click_on "пользователи"
+    click_on "Users"
     expect(page.current_path).to eq users_path
     expect(page).to have_content users.first.email
     click_on "Last"
@@ -17,7 +17,7 @@ feature "user profile" do
   end
 
   scenario "non-auth visits one's profile" do
-    click_on "пользователи"
+    click_on "Users"
     click_on users.first.email
     expect(page.current_path).to eq user_path(users.first)
     expect(page).to_not have_content "редактировать/удалить ваш эккаунт"
@@ -31,26 +31,26 @@ feature "user profile" do
     end
 
     scenario "auth sees user's list" do
-      click_on "пользователи"
+      click_on "Users"
       expect(page.current_path).to eq users_path
       expect(page).to have_content users.first.email
       expect(page).to have_content users.second.email
     end
 
     scenario "owner visits his profile" do
-      click_on "приветствуем, #{user.name}"
+      click_on "приветствуем, #{user.email}"
       expect(page.current_path).to eq user_path(user)
       expect(page).to have_content "редактировать/удалить ваш эккаунт"
     end
 
     scenario "owner can edit his profile" do
-      click_on "приветствуем, #{user.name}"
+      click_on "приветствуем, #{user.email}"
       click_on "редактировать/удалить ваш эккаунт"
       expect(page).to have_content "Edit User"
     end
 
     scenario "owner edits his profile" do
-      click_on "приветствуем, #{user.name}"
+      click_on "приветствуем, #{user.email}"
       click_on "редактировать/удалить ваш эккаунт"
       fill_in 'Name', with: "NAME"
       fill_in 'Current password', with: user.password
@@ -60,13 +60,13 @@ feature "user profile" do
     end
 
     scenario "owner can delete his profile" do
-      click_on "приветствуем, #{user.name}"
+      click_on "приветствуем, #{user.email}"
       click_on "редактировать/удалить ваш эккаунт"
       expect(page).to have_content "Cancel my account"
     end
 
     scenario "owner deletes his profile" do
-      click_on "приветствуем, #{user.name}"
+      click_on "приветствуем, #{user.email}"
       click_on "редактировать/удалить ваш эккаунт"
       click_on "Cancel my account"
       expect(page.current_path).to eq root_path
