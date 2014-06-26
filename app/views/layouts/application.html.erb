@@ -10,24 +10,7 @@
   <div class="container">
     <div class="header">
       <h3>Question && Answers</h3>
-      <ul class="nav nav-pills pull-left">
-        <li class="active"><%= link_to 'Home', root_path %></li>
-        <li class="active"><%= link_to 'Top 10', top_questions_path %></li>
-        <li class="active"><%= link_to 'Recent', root_path %></li>
-        <li class="active"><%= link_to 'Unanswered', root_path %></li>
-        <li class="active"><%= link_to 'Users', users_path %></li>
-        <li class="active"><%= link_to 'Tags', root_path %></li>
-
-      </ul>     
-      <ul class="nav nav-pills pull-right">
-        <% if user_signed_in? %>
-          <li class="active"><%= link_to("приветствуем, #{current_user.email}", current_user) %></li>
-          <li><%= link_to('Выйти', destroy_user_session_path, method: :delete) %></li>
-        <% else %>
-          <li><%= link_to('Войти', new_user_session_path) %></li>
-          <li><%= link_to('Зарегистрироваться', new_user_registration_path) %></li>
-        <% end %>
-      </ul>
+      <%= render partial: "layouts/navigation" %>
       <div class="clearfix">
         <% if notice %><p class="alert alert-success"><%= notice %></p> <% end %>
         <% if alert %><p class="alert alert-danger"><%= alert %></p><% end %>
