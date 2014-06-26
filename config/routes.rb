@@ -4,6 +4,9 @@ Tnqa::Application.routes.draw do
   get 'tags/:tag', to: 'questions#index', as: :tag
 
   resources :questions do
+    collection do 
+     get :top, action: :index, type: :top
+    end
     resources :comments
     resources :answers do
       resources :comments

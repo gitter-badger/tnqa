@@ -11,6 +11,7 @@ class Question < ActiveRecord::Base
   has_many :votes, as: :votable
   has_many :favorites, as: :favoritable
 
+  scope :top, -> { all.sort{ |q| -1*q.votes.sum(:score)} }
 
   acts_as_taggable
 

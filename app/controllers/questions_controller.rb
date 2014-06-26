@@ -8,9 +8,12 @@ class QuestionsController < ApplicationController
   def index
     if params[:tag]
       @questions = Question.tagged_with(params[:tag]).page(params[:page])
+    elsif params[:type] == :top
+        @questions = Kaminari.paginate_array(Question.top).page(params[:page])
     else
       @questions = Question.all.page(params[:page])
     end
+
   end
 
   def show
