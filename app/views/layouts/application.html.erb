@@ -7,37 +7,36 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-<div class="container">
-      <div class="header">
-        <ul class="nav nav-pills pull-right">
-          <% if user_signed_in? %>
-            <li class="active"><%= link_to("приветствуем, #{current_user.name}", current_user) %></li>
-            <li><%= link_to('Выйти', destroy_user_session_path, method: :delete) %></li>
-          <% else %>
-            <li><%= link_to('Войти', new_user_session_path) %></li>
-            <li><%= link_to('Зарегистрироваться', new_user_registration_path) %></li>
-          <% end %>
-        </ul>
-        <h3 class="text-muted"> <%= link_to 'Q&A', root_path %></h3>
-        <h4 class="text-muted"> <%= link_to 'пользователи', users_path %></h4>
+  <div class="container">
+    <div class="header">
+      <h3>Question && Answers</h3>
+      <ul class="nav nav-pills pull-left">
+        <li class="active"><%= link_to 'Home', root_path %></li>
+        <li><a href="#">Profile</a></li>
+        <li><a href="#">Messages</a></li>
+      </ul>     
+      <ul class="nav nav-pills pull-right">
+        <% if user_signed_in? %>
+          <li class="active"><%= link_to("приветствуем, #{current_user.email}", current_user) %></li>
+          <li><%= link_to('Выйти', destroy_user_session_path, method: :delete) %></li>
+        <% else %>
+          <li><%= link_to('Войти', new_user_session_path) %></li>
+          <li><%= link_to('Зарегистрироваться', new_user_registration_path) %></li>
+        <% end %>
+      </ul>
+      <div class="clearfix">
+        <% if notice %><p class="alert alert-success"><%= notice %></p> <% end %>
+        <% if alert %><p class="alert alert-danger"><%= alert %></p><% end %>
       </div>
-
-      <% if notice %><p class="alert alert-success"><%= notice %></p> <% end %>
-      <% if alert %><p class="alert alert-danger"><%= alert %></p><% end %>
-
-
-      <div class="row marketing"><%= yield %></div>
-
-      <div class="footer">
-      </br>
+    </div>
+    <div class="row marketing"><%= yield %></div>
+    <div class="footer">
       <div id="tag_cloud">
         <% tag_cloud Question.tag_counts, %w[s m l] do |tag, css_class| %>
           <%= link_to tag.name, tag_path(tag.name), class: css_class %>
         <% end %>
       </div>
-      </br>
-        <p>&copy; Company 2014</p>
-      </div>
-    </div> <!-- /container -->
+    </div>
+  </div> <!-- /container -->
 </body>
 </html>

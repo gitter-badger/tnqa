@@ -1,6 +1,13 @@
 h3
   - if user_signed_in?
     small= link_to 'ЗАДАТЬ ВОПРОС', new_question_path
+ul.nav.nav-tabs
+  li.active
+    a href="#"  Home
+  li
+    a href="#"  Profile
+  li
+    a href="#"  Messages    
 p    
 	= render @questions
 	.raw
