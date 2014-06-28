@@ -42,6 +42,7 @@ gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'omniauth-twitter'
 gem "pundit"
+gem 'doorkeeper'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
@@ -63,6 +64,7 @@ group :development, :test do
   gem "better_errors"
   gem "binding_of_caller"
   gem 'xray-rails'
+  gem 'json_spec'
 end
 
 # Use ActiveModel has_secure_password
