@@ -2,6 +2,7 @@ class Api::V1::BaseController < ApplicationController
   doorkeeper_for :all
 
   layout false
+  
  protected
 
   def current_resource_owner

@@ -43,6 +43,7 @@ gem 'omniauth-facebook'
 gem 'omniauth-twitter'
 gem "pundit"
 gem 'doorkeeper'
+gem 'rest-client'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.

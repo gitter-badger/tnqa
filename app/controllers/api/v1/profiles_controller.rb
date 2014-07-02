@@ -4,4 +4,8 @@ respond_to :json
   def me
     respond_with current_resource_owner
   end
+
+  def index
+    respond_with({ users: User.all.to_a })
+  end
 end

@@ -31,6 +31,12 @@ describe "Profiles API" do
         end
       end
 
+      it 'returns two profiles' do
+        create(:user)
+        get '/api/v1/profiles', format: :json, access_token: access_token.token
+        expect(response.body).to have_json_size(2).at_path('users')
+      end
+
       %w(password encrypted_password).each do |attr|
         it "does not contain #{attr}" do
           expect(response.body).to_not have_json_path(attr)
