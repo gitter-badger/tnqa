@@ -44,6 +44,9 @@ gem 'omniauth-twitter'
 gem "pundit"
 gem 'doorkeeper'
 gem 'rest-client'
+gem 'sidekiq'
+gem 'sidetiq'
+gem 'sinatra', '>= 1.3', require: nil
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
