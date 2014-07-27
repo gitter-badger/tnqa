@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140627154800) do
+ActiveRecord::Schema.define(version: 20140727140233) do
 
   create_table "answers", force: true do |t|
     t.text     "content"
@@ -56,6 +56,22 @@ ActiveRecord::Schema.define(version: 20140627154800) do
 
   add_index "comments", ["commentable_id", "commentable_type"], name: "index_comments_on_commentable_id_and_commentable_type"
   add_index "comments", ["user_id"], name: "index_comments_on_user_id"
+
+  create_table "delayed_jobs", force: true do |t|
+    t.integer  "priority",   default: 0, null: false
+    t.integer  "attempts",   default: 0, null: false
+    t.text     "handler",                null: false
+    t.text     "last_error"
+    t.datetime "run_at"
+    t.datetime "locked_at"
+    t.datetime "failed_at"
+    t.string   "locked_by"
+    t.string   "queue"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority"
 
   create_table "favorites", force: true do |t|
     t.integer  "user_id"
@@ -116,6 +132,14 @@ ActiveRecord::Schema.define(version: 20140627154800) do
     t.integer  "user_id"
     t.integer  "action_value"
     t.string   "action_name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "subscriptions", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "subscribable_id"
+    t.string   "subscribable_type"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

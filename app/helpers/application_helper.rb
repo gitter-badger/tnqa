@@ -25,13 +25,13 @@ module ApplicationHelper
     if current_user.favorite?(object)
 	    link_to(favorite_path_for(object), remote: true, method: :delete) do
 	      button_tag(class: "btn btn-default") do
-	        content_tag(:span, '', class: 'glyphicon glyphicon-minus')
+	        content_tag(:span, '', class: 'glyphicon glyphicon-star')
 	      end
 	    end
     else
 	    link_to(favorite_path_for(object), remote: true, method: :post) do
 	      button_tag(class: "btn btn-default") do
-	        content_tag(:span, '', class: 'glyphicon glyphicon-plus')
+	        content_tag(:span, '', class: 'glyphicon glyphicon-star-empty')
 	      end
 	    end
     end

@@ -1,18 +1,19 @@
 <div class='raw' id='<%= dom_id(question) %>' >
   <div class='col-md-1'>
     <% if user_signed_in? %>
-      <h3><%= vote_for(question) %><h3>
+      <h3 class="value" style="text-align: center"><%= question.votes.sum(:score) %></h3>
+      <h3 style="text-align: center"><%= vote_for(question) %><h3>
     <% end %>
   </div>
-  <div class='col-md-1'>
+ <!-- <div class='col-md-1'>
     <h3 class="value"><%= question.votes.sum(:score) %></h3>
-  </div>
+  </div> -->
   <div class='col-md-1'>
     <% if user_signed_in? %>
       <h3><%= favorite_for(question) %><h3>
     <% end %>
   </div>  
-  <div class='col-md-9'>
+  <div class='col-md-10'>
     <hr>
     <p> 
      <%= avatar(question.user) %>

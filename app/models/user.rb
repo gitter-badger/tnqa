@@ -22,6 +22,9 @@ class User < ActiveRecord::Base
   has_many :votes
   has_many :reps
   has_many :favorites
+  has_many :subscriptions
+  has_many :subscriptions, as: :subscribable
+
 
 
   def vote!(object)
@@ -58,6 +61,22 @@ class User < ActiveRecord::Base
   def favorite?(object)
     favorites.where(favoritable: object).exists?
   end
+
+  def subscribe!(object)
+    subs = subscriptions.where(subscribable: object).first_or_initialize
+    subs.save!
+  end
+
+  def unsubscribe!(object)
+    if subs = subscriptions.where(subscribable: object).first
+      subs.destroy!
+    end
+  end
+
+  def subscribed?(object)
+    subscriptions.where(subscribable: object).exists?
+  end
+
 
 
   def self.find_for_oauth(auth)
