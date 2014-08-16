@@ -1,48 +1,53 @@
 .question id="question_#{@question.id}" style="color: #556B2F; font-size: 120%;"
-  p= avatar(@question.user)
-  h4= @question.title
-  p.content= @question.content
-  p
-  ul
-    - @question.attachments.each do |a|
-      li= link_to a.file.identifier, a.file.url
-  p
-    small= raw @question.tag_list.map { |t| link_to t, tag_path(t), class: "label label-primary" }.join(' ')
+  .col-md-1
+    - if user_signed_in?
+      h3
+        = favorite_for(@question)
+  .col-md-11
+    p= avatar(@question.user)
+    h4= @question.title
+    p.content= @question.content
+    p
+    ul
+      - @question.attachments.each do |a|
+        li= link_to a.file.identifier, a.file.url
+    p
+      small= raw @question.tag_list.map { |t| link_to t, tag_path(t), class: "label label-primary" }.join(' ')
 
 
-  - if @question.user == current_user
-        small= link_to 'E.Q. / ', '', class: 'edit-question-link', data: { question_id: @question.id }
-        small= link_to ' D.Q.', question_path(@question), method: :delete, data: {confirm: 'Are you sure?'}
-        
-        = form_for @question, remote: true, html: { id: "edit-question-#{@question.id}"} do |f|
-          p
-          .form-group
-            small= f.label :content, "внесите изменения"
-            small= f.text_area :content, class: "form-control input-sm", placeholder: "ваши изменения"
-            small= f.submit 'сохранить', class: "btn btn-success btn-xs"
+    - if @question.user == current_user
+          small= link_to 'E.Q. / ', '', class: 'edit-question-link', data: { question_id: @question.id }
+          small= link_to ' D.Q.', question_path(@question), method: :delete, data: {confirm: 'Are you sure?'}
+          
+          = form_for @question, remote: true, html: { id: "edit-question-#{@question.id}"} do |f|
+            p
+            .form-group
+              small= f.label :content, "внесите изменения"
+              small= f.text_area :content, class: "form-control input-sm", placeholder: "ваши изменения"
+              small= f.submit 'сохранить', class: "btn btn-success btn-xs"
 
-  p
-    .comments
-      = render partial: 'comments/list', locals: {commentable: @question}
+    p
+      .comments
+        = render partial: 'comments/list', locals: {commentable: @question}
 
-  .answers style="font-size: 90%;"
-    = render 'answers'
+    .answers style="font-size: 90%;"
+      = render 'answers'
 
-  - if user_signed_in?
-    = nested_form_for [@question, @answer], remote: true do |f|
-      p 
-      .form-group
-        .answer_errors
-        = f.text_area :content, class: "form-control input-sm", placeholder: "ваш ответ"
-        small= f.link_to_add "добавить файл", :attachments
-      p
+    - if user_signed_in?
+      = nested_form_for [@question, @answer], remote: true do |f|
+        p 
         .form-group
-          = f.fields_for :attachments do |a|
-            = a.label :file
-            = a.file_field :file
-            small= a.link_to_remove "удалить файл"
-      p
-      .actions
-       = f.submit 'Добавьте ответ', class: "btn btn-success btn-xs"
+          .answer_errors
+          = f.text_area :content, class: "form-control input-sm", placeholder: "ваш ответ"
+          small= f.link_to_add "добавить файл", :attachments
+        p
+          .form-group
+            = f.fields_for :attachments do |a|
+              = a.label :file
+              = a.file_field :file
+              small= a.link_to_remove "удалить файл"
+        p
+        .actions
+         = f.submit 'Добавьте ответ', class: "btn btn-success btn-xs"
 
-= subscribe_to "/questions/#{@question.id}/answers"
+  = subscribe_to "/questions/#{@question.id}/answers"

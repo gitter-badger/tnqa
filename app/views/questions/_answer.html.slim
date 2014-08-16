@@ -3,15 +3,14 @@
   .answer id="answer_#{answer.id}" style="color: #696969;"
     .col-md-1
       - if user_signed_in?
+        h3.value= answer.votes.sum(:score)
         h3
           = vote_for(answer)
           h3
     .col-md-1
-      h3.value= answer.votes.sum(:score)
-    .col-md-1
         h3
           = favorite_for(answer)
-    .col-md-9
+    .col-md-10
       = avatar(answer.user)
 
 
