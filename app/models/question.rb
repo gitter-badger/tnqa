@@ -10,6 +10,8 @@ class Question < ActiveRecord::Base
   has_many :comments, as: :commentable
   has_many :votes, as: :votable
   has_many :favorites, as: :favoritable
+  has_many :subscriptions, as: :subscribable
+
 
   scope :top, -> { all.sort{ |q| -1*q.votes.sum(:score)} }
   scope :unanswered, -> { all.to_a.keep_if { |q| q.answers.empty? } }
