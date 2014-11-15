@@ -27,7 +27,6 @@ Tnqa::Application.routes.draw do
   resource :favorites, only: [:create, :destroy]
   resource :subscriptions, only: [:create, :destroy]
 
-
   namespace :api do
     namespace :v1 do
       resources :profiles do

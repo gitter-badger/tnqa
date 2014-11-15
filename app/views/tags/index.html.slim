@@ -1,4 +1,4 @@
 #tag_cloud
- ul
+  ul
 	  - tag_cloud Question.tag_counts, %w[s m l] do |tag, css_class|
 	    li= link_to tag.name, tag_path(tag.name), class: css_class

@@ -23,7 +23,7 @@ describe CommentPolicy do
       user = create(:user)
       expect(described_class.new(user, record).update?).to eq(false)
     end
-    
+
     it 'is true if user is author' do
       expect(described_class.new(user, record).update?).to eq(true)
     end

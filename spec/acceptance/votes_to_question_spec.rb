@@ -15,8 +15,8 @@ feature 'Voting', 'ability to change question votes' do
     visit root_path
     within "#question_#{question.id}" do
       expect{
-      page.find(".glyphicon-thumbs-up").click
-      sleep 2
+        page.find(".glyphicon-thumbs-up").click
+        sleep 2
       }.to change{get_vote(page, question)}.by(1)
     end
   end
@@ -26,8 +26,8 @@ feature 'Voting', 'ability to change question votes' do
     visit root_path
     within "#question_#{question.id}" do
       expect{
-      page.find(".glyphicon-thumbs-down").click
-      sleep 2
+        page.find(".glyphicon-thumbs-down").click
+        sleep 2
       }.to change{get_vote(page, question)}.by(-1)
     end
   end
@@ -37,9 +37,9 @@ feature 'Voting', 'ability to change question votes' do
     visit root_path
     within "#question_#{question.id}" do
       expect{
-      page.find(".glyphicon-thumbs-up").click
-      sleep 2
-      }.to change{get_vote(page, question)}.by(1)    end
+        page.find(".glyphicon-thumbs-up").click
+        sleep 2
+    }.to change{get_vote(page, question)}.by(1)    end
   end
 
   scenario 'owner subtracts vote', js: true do
@@ -47,9 +47,9 @@ feature 'Voting', 'ability to change question votes' do
     visit root_path
     within "#question_#{question.id}" do
       expect{
-      page.find(".glyphicon-thumbs-down").click
-      sleep 2
-      }.to change{get_vote(page, question)}.by(-1)    end
+        page.find(".glyphicon-thumbs-down").click
+        sleep 2
+    }.to change{get_vote(page, question)}.by(-1)    end
   end
 
   scenario 'Non-auth user tries to up vote', js: true do

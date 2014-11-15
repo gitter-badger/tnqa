@@ -1,4 +1,5 @@
 class Rep < ActiveRecord::Base
+belongs_to :user
 
 REPUTATION = {
 	vote_question: 5,
@@ -6,7 +7,4 @@ REPUTATION = {
 	vote_answer: 10,
 	unvote_answer: -2
 }
-
-belongs_to :user
-
 end

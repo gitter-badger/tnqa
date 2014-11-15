@@ -51,9 +51,6 @@ feature 'Signing up', 'sign up to ask' do
       fill_in 'Password', with: user.password
       fill_in 'Password confirmation', with: user.password_confirmation
       click_on 'Sign up'
-
-
-
       expect(page).to have_content "prohibited this user from being saved"
     end
 

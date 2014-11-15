@@ -12,5 +12,3 @@ FactoryGirl.define do
   	content nil
   end
 end
-#title { Faker::Lorem.sentence(3, true, 4) }
-#content { Faker::Lorem.paragraph(rand(2..6)) }

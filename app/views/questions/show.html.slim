@@ -1,9 +1,12 @@
 .question id="question_#{@question.id}" style="color: #556B2F; font-size: 120%;"
-  .col-md-1
-    - if user_signed_in?
+  - if user_signed_in?
+    .col-md-1
+        h3.value= @question.votes.sum(:score)
+        = vote_for(@question)
+    .col-md-1
       h3
         = favorite_for(@question)
-  .col-md-11
+  .col-md-10
     p= avatar(@question.user)
     h4= @question.title
     p.content= @question.content
@@ -13,26 +16,21 @@
         li= link_to a.file.identifier, a.file.url
     p
       small= raw @question.tag_list.map { |t| link_to t, tag_path(t), class: "label label-primary" }.join(' ')
-
-
     - if @question.user == current_user
-          small= link_to 'E.Q. / ', '', class: 'edit-question-link', data: { question_id: @question.id }
-          small= link_to ' D.Q.', question_path(@question), method: :delete, data: {confirm: 'Are you sure?'}
-          
+          small= link_to 'редактировать / ', '', class: 'edit-question-link', data: { question_id: @question.id }
+          small= link_to ' удалить', question_path(@question), method: :delete, data: {confirm: 'Are you sure?'}
           = form_for @question, remote: true, html: { id: "edit-question-#{@question.id}"} do |f|
             p
             .form-group
               small= f.label :content, "внесите изменения"
               small= f.text_area :content, class: "form-control input-sm", placeholder: "ваши изменения"
               small= f.submit 'сохранить', class: "btn btn-success btn-xs"
-
     p
       .comments
         = render partial: 'comments/list', locals: {commentable: @question}
 
     .answers style="font-size: 90%;"
       = render 'answers'
-
     - if user_signed_in?
       = nested_form_for [@question, @answer], remote: true do |f|
         p 
@@ -49,5 +47,4 @@
         p
         .actions
          = f.submit 'Добавьте ответ', class: "btn btn-success btn-xs"
-
   = subscribe_to "/questions/#{@question.id}/answers"

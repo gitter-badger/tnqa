@@ -2,10 +2,10 @@ require_relative 'acceptance_helper'
 
 feature 'update question', 'to correct info I want to update question' do
 
-let(:user) {create(:user)}
-let(:user2) {create(:user)}
-let!(:question) {create(:question, user: user)}
-let!(:question2) {create(:question, user: user2)}
+  let(:user) {create(:user)}
+  let(:user2) {create(:user)}
+  let!(:question) {create(:question, user: user)}
+  let!(:question2) {create(:question, user: user2)}
 
   scenario 'auth user updates question' do
     sign_in(user)

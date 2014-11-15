@@ -1,27 +1,22 @@
 - if answer.persisted?
   hr
   .answer id="answer_#{answer.id}" style="color: #696969;"
+  - if user_signed_in?
     .col-md-1
-      - if user_signed_in?
         h3.value= answer.votes.sum(:score)
-        h3
-          = vote_for(answer)
-          h3
+        = vote_for(answer)
     .col-md-1
-        h3
-          = favorite_for(answer)
+      h3
+        = favorite_for(answer)
     .col-md-10
       = avatar(answer.user)
-
-
       p= answer.content
       ul
         - answer.attachments.each do |a|
           li= link_to a.file.file.identifier, a.file.url
       - if policy(answer).update?
-        small= link_to 'E.A. / ', '', class: 'edit-answer-link', data: { answer_id: answer.id }
-        small= link_to ' D.A.', question_answer_path(answer.question, answer), method: :delete, data: {confirm: 'Вы хотите удалить ответ?'}
-
+        small= link_to 'редактировать / ', '', class: 'edit-answer-link', data: { answer_id: answer.id }
+        small= link_to ' удалить', question_answer_path(answer.question, answer), method: :delete, data: {confirm: 'Вы хотите удалить ответ?'}
         = nested_form_for answer, remote: true, html: { id: "edit-answer-#{answer.id}"} do |f|
           p
           .form-group
@@ -29,8 +24,9 @@
             small= f.label :content, "внесите изменения"
             small= f.text_area :content, class: "form-control input-sm", placeholder: "ваши изменения"
             small= f.submit 'сохранить', class: "btn btn-success btn-xs"
-
       p
         .comments style="font-size: 80%;"
           .js-comment-errors
           = render partial: 'comments/list', locals: {commentable: answer}
+  .col-md-12
+    hr     

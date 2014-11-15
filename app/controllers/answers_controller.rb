@@ -4,7 +4,7 @@ class AnswersController < ApplicationController
 
   def create
     @question = Question.find(params[:question_id])
-    @answer = @question.answers.create(answer_params)  do |answer|
+    @answer = @question.answers.create(answer_params) do |answer|
       answer.user = current_user
       authorize answer
     end
@@ -14,8 +14,10 @@ class AnswersController < ApplicationController
     @answer = Answer.find(params[:id])
     authorize @answer
     @question = @answer.question
-    if @answer = current_user.answers.where(id: params[:id]).first
+    if @answer.user == current_user
       @answer.update(answer_params)
+    else
+      flash[:error] = "редактирование доступно только автору"
     end
   end
 
@@ -23,8 +25,11 @@ class AnswersController < ApplicationController
     @answer = Answer.find(params[:id])
     authorize @answer
     question = @answer.question
-    if @answer = current_user.answers.where(id: params[:id]).first
+    if @answer.user == current_user
       @answer.destroy
+      redirect_to question
+    else
+      flash[:error] = "удаление доступно только автору"
     end
   end
 

@@ -5,7 +5,6 @@ describe QuestionsController do
   let(:user) { create(:user) }
   let(:invalid_question) { create(:invalid_question) }
 
-
   describe 'GET #index' do
     let(:questions) {create_list(:question, 2)}
 
@@ -43,7 +42,6 @@ describe QuestionsController do
     it 'assigns a new question to @question' do
       expect(assigns(:question)).to be_a_new(Question)
     end
-
 
     it 'renders new view' do
       expect(response).to render_template :new

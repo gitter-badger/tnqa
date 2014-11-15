@@ -2,7 +2,7 @@ class Question < ActiveRecord::Base
   validates :title, presence: true, length: {minimum: 5}
   validates :content, presence: true
 
-  paginates_per 3
+  paginates_per 10
 
   belongs_to :user
   has_many :answers, dependent: :destroy
@@ -11,7 +11,6 @@ class Question < ActiveRecord::Base
   has_many :votes, as: :votable
   has_many :favorites, as: :favoritable
   has_many :subscriptions, as: :subscribable
-
 
   scope :top, -> { all.sort{ |q| -1*q.votes.sum(:score)} }
   scope :unanswered, -> { all.to_a.keep_if { |q| q.answers.empty? } }

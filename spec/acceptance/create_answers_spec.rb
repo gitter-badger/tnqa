@@ -1,29 +1,28 @@
 require_relative 'acceptance_helper'
 
-feature 'User answer', 'to help friends I answer their questions' do 
-	
-	let(:user) { create(:user, :with_reputation) }
-	let(:question) { create(:question)}
+feature 'User answer', 'to help friends I answer their questions' do
 
-	scenario 'auth user create answer', js: true do
-	sign_in(user)
-	visit question_path(question)
+  let(:user) { create(:user, :with_reputation) }
+  let(:question) { create(:question)}
 
-	fill_in 'ваш ответ', with: 'My answer'
-	click_on 'Добавьте ответ'
+  scenario 'auth user create answer', js: true do
+    sign_in(user)
+    visit question_path(question)
 
-	expect(current_path).to eq question_path(question)
-	within '.answers' do
-  expect(page).to have_content 'My answer'
-	end
-	end
+    fill_in 'ваш ответ', with: 'My answer'
+    click_on 'Добавьте ответ'
 
-	scenario 'auth user try to create invalid answer', js: true do
+    expect(current_path).to eq question_path(question)
+    within '.answers' do
+      expect(page).to have_content 'My answer'
+    end
+  end
+
+  scenario 'auth user try to create invalid answer', js: true do
     sign_in(user)
     visit question_path(question)
 
     click_on 'Добавьте ответ'
     expect(page).to have_content "Content can't be blank"
-	end
+  end
 end
-

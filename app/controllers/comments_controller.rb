@@ -12,17 +12,17 @@ class CommentsController < ApplicationController
   def update
     @comment = Comment.find(params[:id])
     authorize @comment
-    #if @comment.user == current_user
+    if @comment.user == current_user
     @comment.update(comment_params)
-    #end
+    end
   end
 
   def destroy
     @comment = Comment.find(params[:id])
     authorize @comment
-    #if @comment.user == current_user
+    if @comment.user == current_user
     @comment.destroy
-    #end
+    end
   end
 
   private

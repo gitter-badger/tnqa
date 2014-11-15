@@ -6,18 +6,15 @@ class ApplicationController < ActionController::Base
 
   protect_from_forgery with: :exception
 
+  rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
+
   def without_pundit?
     defined? :device_controller?
   end
-  # rescue_from CanCan::AccessDenied do
-  #   render text: 'Доступ запрещен'
-  # end
 
   def after_sign_up_path_for(questions)
     questions_path(questions)
   end
-
-  rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
   private
 

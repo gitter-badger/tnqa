@@ -1,0 +1,11 @@
+.raw id="#{dom_id(question)}"
+  .col-md-12
+    p
+      = avatar(question.user) 
+    h4
+      = link_to question.title, question 
+    p.text-muted
+      = truncate(question.content, length: 185) { link_to "Continue", question }
+    p
+      = raw question.tag_list.map { |t| link_to t, tag_path(t), class: "label label-primary" }.join(' ')
+    hr

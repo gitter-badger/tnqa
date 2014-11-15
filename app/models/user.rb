@@ -3,16 +3,14 @@ class User < ActiveRecord::Base
   include Gravtastic
 
   gravtastic :default => "monsterid",
-    :size => 38
+             :size => 38
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
     :recoverable, :rememberable, :trackable, :validatable, :omniauthable, omniauth_providers: [:facebook, :twitter]
 
-
-
-  #validates :name, presence: true, length: {in: 0..200}
+  validates :name, presence: true, length: {in: 0..200}
 
   paginates_per 5
 
@@ -24,8 +22,6 @@ class User < ActiveRecord::Base
   has_many :favorites
   has_many :subscriptions
   has_many :subscriptions, as: :subscribable
-
-
 
   def vote!(object)
     vote = votes.where(votable: object).first_or_initialize
@@ -77,12 +73,9 @@ class User < ActiveRecord::Base
     subscriptions.where(subscribable: object).exists?
   end
 
-
-
   def self.find_for_oauth(auth)
     @authorization = Authorization.where(provider: auth.provider, uid: auth.uid.to_s).first
     return @authorization.user if @authorization
-
     email = auth.info[:email] || "#{auth.uid}@fromtwitter.com"
     user = User.where(email: email).first
     if user

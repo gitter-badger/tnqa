@@ -15,16 +15,16 @@ describe AnswerPolicy do
     it 'is false if user exists and rep < 50' do
       user.reps.create action_value: 5
       expect(described_class.new(user, record).create?).to eq(false)
-    end    
+    end
   end
 
   context '#update?' do
-    it 'is false if user non-author' do 
+    it 'is false if user non-author' do
       user = create(:user)
       expect(described_class.new(user, record).update?).to eq(false)
     end
 
-    it 'is true if user non-author but his rep >= 2000' do 
+    it 'is true if user non-author but his rep >= 2000' do
       user = create(:user)
       user.reps.create action_value: 2000
       expect(described_class.new(user, record).update?).to eq(true)
@@ -36,7 +36,7 @@ describe AnswerPolicy do
   end
 
   context '#destroy?' do
-    it 'is false if user non-author' do 
+    it 'is false if user non-author' do
       user = create(:user)
       expect(described_class.new(user, record).destroy?).to eq(false)
     end

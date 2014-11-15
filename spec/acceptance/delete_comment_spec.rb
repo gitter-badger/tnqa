@@ -9,8 +9,7 @@ feature 'delete comment for question', 'deleting comments', js: true do
 
   scenario 'non-auth user try to destroy comment' do
     visit question_path(question)
-    
-      expect(page).to_not have_link "- коммент"
+    expect(page).to_not have_link "- коммент"
   end
 
   scenario 'other user try to destroy comment', js: true do
@@ -40,7 +39,7 @@ feature 'delete comment for question', 'deleting comments', js: true do
         page.driver.browser.switch_to.alert.accept
         expect(current_path).to eq question_path(question)
       end
-        expect(page).to_not have_selector "#comment_#{comment.id}"
+      expect(page).to_not have_selector "#comment_#{comment.id}"
     end
   end
 end
