@@ -9,8 +9,8 @@
       h3
         = favorite_for(answer)
     .col-md-10
-      = avatar(answer.user)
       p= answer.content
+      p= avatar(answer.user)
       ul
         - answer.attachments.each do |a|
           li= link_to a.file.file.identifier, a.file.url

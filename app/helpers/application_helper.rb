@@ -1,10 +1,6 @@
 module ApplicationHelper
   def avatar(user, options = {})
-    if user
-      link_to image_tag(user.gravatar_url(options)), user
-    else
-      ""
-    end
+    link_to(image_tag(user.gravatar_url(options)), user) if user
   end
 
   def vote_for(object)

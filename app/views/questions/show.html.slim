@@ -1,16 +1,14 @@
 .question id="question_#{@question.id}" style="color: #556B2F; font-size: 120%;"
   - if user_signed_in?
     .col-md-1
-        h3.value= @question.votes.sum(:score)
-        = vote_for(@question)
+      h3= @question.votes.sum(:score)
+      = vote_for(@question)
     .col-md-1
-      h3
-        = favorite_for(@question)
+      h3= favorite_for(@question)
   .col-md-10
-    p= avatar(@question.user)
     h4= @question.title
-    p.content= @question.content
-    p
+    p= @question.content
+    p= avatar(@question.user)
     ul
       - @question.attachments.each do |a|
         li= link_to a.file.identifier, a.file.url
@@ -28,7 +26,6 @@
     p
       .comments
         = render partial: 'comments/list', locals: {commentable: @question}
-
     .answers style="font-size: 90%;"
       = render 'answers'
     - if user_signed_in?
